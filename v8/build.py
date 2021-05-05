@@ -13,7 +13,7 @@ v8_windows_binary_url = "https://github.com/richardjhughes/project-dependencies/
 v8_darwin_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Darwin.zip"
 v8_darwin_ios_binary_url = ""
 v8_darwin_ios_simulator_binary_url = ""
-v8_linux_binary_url = ""
+v8_linux_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Linux.zip"
 
 v8_source_dir = os.path.join(cwd, "v8")
 depot_tools_dir = os.path.join(v8_source_dir, "depot_tools")
