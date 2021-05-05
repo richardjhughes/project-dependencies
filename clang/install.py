@@ -91,7 +91,7 @@ def installForWindows(installDir):
     filename = "clang.zip"
 
     # download clang
-    cmd = ["curl", "-L", "https://github.com/snowmeltarcade/project-dependencies/releases/download/LLVM_12.0.0_Windows/LLVM_12.0.0.zip", "-o", filename]
+    cmd = ["curl", "-L", "https://github.com/richardjhughes/project-dependencies/releases/download/LLVM_12.0.0/LLVM_12.0.0_Windows.zip", "-o", filename]
     runCmd(cmd)
 
     # install
