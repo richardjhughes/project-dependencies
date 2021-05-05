@@ -95,6 +95,26 @@ iOS Simulator:
 python3 install.py -p /path/to/install/directory/ -iossim
 ```
 
+## SDL
+
+##### Correct as of 2021-05-05
+
+Using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
+
+To build, you need to install:
+
+* Git
+* CMake
+* Standard compiler setup for your platform (MSVC, Clang, GCC, XCode etc...)
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Windows, Linux or Mac.
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)
