@@ -10,7 +10,8 @@ sdlGitURL = "https://github.com/libsdl-org/SDL.git"
 
 sdlDownloadURLWindows = ""
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Darwin.zip"
-sdlDownloadURLiOS = ""
+sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS.zip"
+sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS_Simulator.zip"
 sdlDownloadURLLinux = ""
 
 gitPath = shutil.which("git")
@@ -109,27 +110,57 @@ def build(buildiOS, tempDirPath):
 def saveResults(buildiOS, tempDirPath):
     print("Saving results...")
 
-    sdlPath = os.path.join(tempDirPath, "SDL")
-    buildDir = os.path.join(sdlPath, "build")
+    if buildiOS:
+        print("Saving results for iOS...")
 
-    platformLibName = getPlatformLibName(buildiOS)
+        # save ios
+        includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "include", "SDL2")
+        buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "lib")
 
-    destIncludeDir = os.path.join(os.getcwd(), "include")
-    destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+        platformLibName = getPlatformLibName(True, False)
 
-    createDirectories(destIncludeDir)
+        destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+
+        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+
+        # save ios simulator
+        includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "include", "SDL2")
+        buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "lib")
+
+        platformLibName = getPlatformLibName(False, True)
+
+        destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+
+        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+
+        print("Saved results for iOS.")
+    else:
+        print("Saving results for current platform...")
+
+        sdlPath = os.path.join(tempDirPath, "SDL")
+        buildDir = os.path.join(sdlPath, "build")
+        includePath = os.path.join(sdlPath, "include")
+
+        platformLibName = getPlatformLibName(False, False)
+
+        destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+
+        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+        
+        print("Saved results for current platform...")
+
+    print("Saved results.")
+
+
+def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
     createDirectories(destLibDir)
 
-    # save includes
-    shutil.copytree(os.path.join(sdlPath, "include"), destIncludeDir, dirs_exist_ok=True)
-
-    # save binaries
     zipDir = getZipPath(destLibDir, platformLibName)
 
     with zipfile.ZipFile(zipDir, "w") as zip:
-
-        # SDL_config.h is platform specific, so save it in the zip file
-        zip.write(os.path.join(buildDir, "include", "SDL_config.h"), "SDL_config.h")
+        for root, dirs, files in os.walk(includePath):
+            for file in files:
+                zip.write(os.path.join(root, file), os.path.join("include", file))
 
         if platform.system() == "Windows":
             zip.write(os.path.join(buildDir, "libSDL2.lib"), "libSDL2.lib")
@@ -138,13 +169,13 @@ def saveResults(buildiOS, tempDirPath):
             zip.write(os.path.join(buildDir, "libSDL2.a"), "libSDL2.a")
             zip.write(os.path.join(buildDir, "libSDL2main.a"), "libSDL2main.a")
 
-    print("Saved results.")
 
-
-def getPlatformLibName(buildiOS):
-
-    if platform.system() == "Darwin" and buildiOS:
-        return "iOS"
+def getPlatformLibName(buildiOS, buildiOSSimulator):
+    if platform.system() == "Darwin":
+        if buildiOS:
+            return "iOS"
+        elif buildiOSSimulator:
+            return "iOS_Simulator"
 
     return platform.system()
 
@@ -154,20 +185,33 @@ def getZipPath(destLibDir, platformLibName):
 
 
 def doesNeedBuilding(buildiOS):
-    platformLibName = getPlatformLibName(buildiOS)
+    # only check if the iOS builds are here
+    platformLibName = getPlatformLibName(buildiOS, False)
 
-    destIncludeDir = os.path.join(os.getcwd(), "include")
     destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
 
     zipDir = getZipPath(destLibDir, platformLibName)
 
-    isBuilt = (os.path.exists(destIncludeDir) and
-               os.path.exists(zipDir))
+    isBuilt = os.path.exists(zipDir)
 
     return not isBuilt
 
 
 def tryAndDownloadBinaries(buildiOS):
+    
+    # as we build both ios and ios simulator together, try and
+    # download them together
+    if platform.system() == "Darwin" and buildiOS:
+        if not downloadBinaries(True, False):
+            return False
+        result = downloadBinaries(False, True)
+        return result
+    else:
+        result = downloadBinaries(False, False)
+        return result
+
+
+def downloadBinaries(buildiOS, buildiOSSimulator):
     print("Trying to download pre-built binaries...")
 
     url = ""
@@ -178,6 +222,8 @@ def tryAndDownloadBinaries(buildiOS):
     elif system_name == "Darwin":
         if buildiOS:
             url = sdlDownloadURLiOS
+        elif buildiOSSimulator:
+            url = sdlDownloadURLiOSSimulator
         else:
             url = sdlDownloadURLDarwin
     elif system_name == "Linux":
@@ -189,7 +235,7 @@ def tryAndDownloadBinaries(buildiOS):
     if url == "":
         return False
 
-    platformLibName = getPlatformLibName(buildiOS)
+    platformLibName = getPlatformLibName(buildiOS, buildiOSSimulator)
 
     destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
     zipDir = getZipPath(destLibDir, platformLibName)

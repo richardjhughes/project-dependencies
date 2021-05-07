@@ -72,7 +72,7 @@ def installSDL(path):
     os.chdir("sdl")
 
     # build standard
-    buildPath = os.path.join(os.getcwd(), "sdl", "build.py")
+    buildPath = os.path.join(os.getcwd(), "build.py")
 
     cmd = [f"{pythonPath}", f"{buildPath}"]
     runCmd(cmd)
