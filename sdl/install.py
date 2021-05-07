@@ -4,7 +4,7 @@ import platform
 import argparse
 import zipfile
 
-v8Version = "9.0"
+sdlVersion = "2.0.14"
 
 def configureArguments():
     parser = argparse.ArgumentParser()
@@ -44,19 +44,16 @@ def getFullInstallDir(path, buildForiOS, buildForiOSSimulator):
     else:
         platformName = "unknown"
 
-    installDir = os.path.join(path, "v8", platformName)
+    installDir = os.path.join(path, "sdl", platformName)
 
     return installDir
 
 
-def isv8AlreadyInstalled(path, buildForiOS, buildForiOSSimulator):
+def isSDLAlreadyInstalled(path, buildForiOS, buildForiOSSimulator):
     installDir = getFullInstallDir(path, buildForiOS, buildForiOSSimulator)
 
-    filesExist = ((os.path.exists(os.path.join(installDir, "libv8_libbase.a")) or os.path.exists(os.path.join(installDir, "libv8_libbase.lib"))) and
-                  (os.path.exists(os.path.join(installDir, "libv8_libplatform.a")) or os.path.exists(os.path.join(installDir, "libv8_libplatform.lib"))) and
-                  (os.path.exists(os.path.join(installDir, "libv8_monolith.a")) or os.path.exists(os.path.join(installDir, "libv8_monolith.lib"))) and
-                  (os.path.exists(os.path.join(installDir, "libwee8.a")) or os.path.exists(os.path.join(installDir, "libwee8.lib"))) and
-                  (os.path.exists(os.path.join(path, "v8", "include"))))
+    filesExist = ((os.path.exists(os.path.join(installDir, "sdl.a")) or os.path.exists(os.path.join(installDir, "sdl.lib"))) and
+                  (os.path.exists(os.path.join(path, "sdl", "include"))))
 
     return filesExist
 
@@ -75,7 +72,7 @@ def getBinaryOutPath(buildForiOS, buildForiOSSimulator):
 
 
 def getOutputZipPath(binaryOutPath):
-    zipPath = os.path.join(binaryOutPath, f"v8_{v8Version}.zip")
+    zipPath = os.path.join(binaryOutPath, f"sdl_{sdlVersion}.zip")
 
     return zipPath
 
@@ -91,15 +88,15 @@ def install(path, buildForiOS, buildForiOSSimulator):
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
 
-    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "v8", "include"))
+    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "sdl", "include"))
 
-print("Installing v8...")
+print("Installing SDL...")
 
 args = configureArguments()
 
-if isv8AlreadyInstalled(args.path, args.ios, args.ios_simulator):
-    print("v8 already installed.")
+if isSDLAlreadyInstalled(args.path, args.ios, args.ios_simulator):
+    print("SDL already installed.")
 else:
     install(args.path, args.ios, args.ios_simulator)
 
-print("Installed v8.")
+print("Installed SDL.")

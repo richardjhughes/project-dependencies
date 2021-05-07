@@ -3,3 +3,5 @@ v8/v8/
 v8/lib/
 temp/
 testproj/
+sdl/__temp/
+sdl/lib/

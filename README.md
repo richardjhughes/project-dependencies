@@ -97,7 +97,7 @@ python3 install.py -p /path/to/install/directory/ -iossim
 
 ## SDL
 
-##### Correct as of 2021-05-05
+##### Correct as of 2021-05-06
 
 Using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
 
@@ -105,7 +105,7 @@ To build, you need to install:
 
 * Git
 * CMake
-* Standard compiler setup for your platform (MSVC, Clang, GCC, XCode etc...)
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 To build, run `build.py`:
 
@@ -114,6 +114,20 @@ python3 build.py
 ```
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
+
+To build for iOS, pass the `-ios` flag:
+
+```
+python3 build.py -ios
+```
+
+Note, this only works when building on MacOS.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
 
 ## License
 
