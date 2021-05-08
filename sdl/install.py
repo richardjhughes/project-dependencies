@@ -52,34 +52,51 @@ def getFullInstallDir(path, buildForiOS, buildForiOSSimulator):
 def isSDLAlreadyInstalled(path, buildForiOS, buildForiOSSimulator):
     installDir = getFullInstallDir(path, buildForiOS, buildForiOSSimulator)
 
-    filesExist = ((os.path.exists(os.path.join(installDir, "sdl.a")) or os.path.exists(os.path.join(installDir, "sdl.lib"))) and
-                  (os.path.exists(os.path.join(path, "sdl", "include"))))
+    filesExist = False
+
+    if platform.system() == "Windows":
+        filesExist = (os.path.exists(os.path.join(installDir, "SDL2.dll")) and
+                      os.path.exists(os.path.join(installDir, "SDL2.lib")) and
+                      os.path.exists(os.path.join(installDir, "SDL2main.lib")) and
+                      os.path.exists(os.path.join(installDir, "SDL2.exp")) and
+                      os.path.exists(os.path.join(installDir, "SDL2-static.lib")) and
+                      os.path.exists(os.path.join(installDir, "include")))
+    else:
+        print("...")
 
     return filesExist
 
 
-def getBinaryOutPath(buildForiOS, buildForiOSSimulator):
+def getPlatformName(buildForiOS, buildForiOSSimulator):
     platformName = platform.system()
 
     if buildForiOS:
-        platformName = "iOS"
+        platformName = "ios"
     elif buildForiOSSimulator:
-        platformName = "iOS_Simulator"
+        platformName = "ios_simulator"
+
+    return platformName
+
+
+def getBinaryOutPath(buildForiOS, buildForiOSSimulator):
+    platformName = getPlatformName(buildForiOS, buildForiOSSimulator)
 
     binaryOut = os.path.join(os.getcwd(), "lib", platformName)
 
     return binaryOut
 
 
-def getOutputZipPath(binaryOutPath):
-    zipPath = os.path.join(binaryOutPath, f"sdl_{sdlVersion}.zip")
+def getOutputZipPath(binaryOutPath, buildForiOS, buildForiOSSimulator):
+    platformName = getPlatformName(buildForiOS, buildForiOSSimulator)
+
+    zipPath = os.path.join(binaryOutPath, f"{sdlVersion}_{platformName}.zip")
 
     return zipPath
 
 
 def install(path, buildForiOS, buildForiOSSimulator):
     binaryPath = getBinaryOutPath(buildForiOS, buildForiOSSimulator)
-    zipPath = getOutputZipPath(binaryPath)
+    zipPath = getOutputZipPath(binaryPath, buildForiOS, buildForiOSSimulator)
 
     installDir = getFullInstallDir(path, buildForiOS, buildForiOSSimulator)
 
@@ -88,7 +105,8 @@ def install(path, buildForiOS, buildForiOSSimulator):
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
 
-    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "sdl", "include"))
+    #shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "sdl", "include"))
+
 
 print("Installing SDL...")
 
