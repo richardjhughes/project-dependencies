@@ -117,33 +117,33 @@ def saveResults(buildiOS, tempDirPath):
     if buildiOS:
         print("Saving results for iOS...")
 
-        # save ios
-        includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "include", "SDL2")
-        buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "lib")
+        # # save ios
+        # includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "include", "SDL2")
+        # buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "lib")
 
-        platformLibName = getPlatformLibName(True, False)
+        # platformLibName = getPlatformLibName(True, False)
 
-        destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+        # destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
 
-        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+        # saveBinaries(destLibDir, includePath, platformLibName, buildDir)
 
-        # save ios simulator
-        includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "include", "SDL2")
-        buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "lib")
+        # # save ios simulator
+        # includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "include", "SDL2")
+        # buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "lib")
 
-        platformLibName = getPlatformLibName(False, True)
+        # platformLibName = getPlatformLibName(False, True)
 
-        destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+        # destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
 
-        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+        # saveBinaries(destLibDir, includePath, platformLibName, buildDir)
 
         print("Saved results for iOS.")
     else:
         print("Saving results for current platform...")
 
-        sdlPath = os.path.join(tempDirPath, "SDL")
-        buildDir = os.path.join(sdlPath, "build")
-        includePath = os.path.join(sdlPath, "include")
+        sdlPath = os.path.join(tempDirPath, "install")
+        buildDir = os.path.join(sdlPath, "lib")
+        includePath = os.path.join(sdlPath, "include", "SDL2")
 
         if platform.system() == "Windows":
             buildDir = os.path.join(buildDir, "Release")
@@ -176,8 +176,7 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
             zip.write(os.path.join(buildDir, "SDL2-static.lib"), "SDL2-static.lib")
             zip.write(os.path.join(buildDir, "SDL2main.lib"), "SDL2main.lib")
         else:
-            zip.write(os.path.join(buildDir, "libSDL2.a"), "libSDL2.a")
-            zip.write(os.path.join(buildDir, "libSDL2main.a"), "libSDL2main.a")
+            zip.write(os.path.join(buildDir, "libSDL2_image.a"), "libSDL2_image.a")
 
 
 def getPlatformLibName(buildiOS, buildiOSSimulator):
@@ -277,14 +276,14 @@ args = configureArguments()
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")
 
-#if doesNeedBuilding(args.build_ios):
+if doesNeedBuilding(args.build_ios):
  #   if tryAndDownloadBinaries(args.build_ios):
   #      print("Downloaded pre-built binaries.")
    # else:
-build(args.build_ios, tempDirPath)
+    build(args.build_ios, tempDirPath)
 
-    #    saveResults(args.build_ios, tempDirPath)
-#else:
- #   print("SDL image is already built...")
+    saveResults(args.build_ios, tempDirPath)
+else:
+    print("SDL image is already built...")
 
 print(f"Built SDL image version {sdlVersion}.")
