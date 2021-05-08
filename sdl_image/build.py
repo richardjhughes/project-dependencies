@@ -12,7 +12,7 @@ sdlDownloadURLWindows = ""
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Darwin.zip"
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
-sdlDownloadURLLinux = ""
+sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Linux.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
