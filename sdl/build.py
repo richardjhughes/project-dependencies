@@ -12,7 +12,7 @@ sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Darwin.zip"
 sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS.zip"
 sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS_Simulator.zip"
-sdlDownloadURLLinux = ""
+sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Linux.zip"
 
 gitPath = shutil.which("git")
 cmakePath = shutil.which("cmake")
