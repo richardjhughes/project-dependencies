@@ -100,6 +100,41 @@ def installSDL(path):
     print("Installed SDL.")
 
 
+def installSDLimage(path):
+    print("Installing SDL image...")
+
+    cwd = os.getcwd()
+    os.chdir("sdl_image")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
+
+    # # build ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+    #     runCmd(cmd)
+
+    # # install standard
+    # cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    # runCmd(cmd)
+
+    # # install ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+    #     runCmd(cmd)
+
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+    #     runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed SDL image.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -111,5 +146,7 @@ installClang(installPath)
 installv8(installPath)
 
 installSDL(installPath)
+
+installSDLimage(installPath)
 
 print("Installed all dependencies.")

@@ -9,7 +9,7 @@ sdlVersion = "2.0.5"
 sdlGitURL = "https://github.com/libsdl-org/SDL_image.git"
 
 sdlDownloadURLWindows = ""
-sdlDownloadURLDarwin = ""
+sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Darwin.zip"
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
 sdlDownloadURLLinux = ""
@@ -277,12 +277,12 @@ cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")
 
 if doesNeedBuilding(args.build_ios):
- #   if tryAndDownloadBinaries(args.build_ios):
-  #      print("Downloaded pre-built binaries.")
-   # else:
-    build(args.build_ios, tempDirPath)
+    if tryAndDownloadBinaries(args.build_ios):
+        print("Downloaded pre-built binaries.")
+    else:
+        build(args.build_ios, tempDirPath)
 
-    saveResults(args.build_ios, tempDirPath)
+        saveResults(args.build_ios, tempDirPath)
 else:
     print("SDL image is already built...")
 
