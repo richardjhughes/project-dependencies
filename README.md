@@ -141,7 +141,10 @@ To build, you need to install:
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 For Linux:
-* Autoconf (`sudo apt-get install autoconf`)
+* Autoconf
+    ```
+    sudo apt-get install autoconf
+    ```
 
 To build, run `build.py`:
 
