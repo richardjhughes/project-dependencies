@@ -129,6 +129,25 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+## SDL Image
+
+##### Correct as of 2021-05-08
+
+Using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
+
+To build, you need to install:
+
+* Git
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Windows, Linux or Mac.
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)
