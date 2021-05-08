@@ -62,7 +62,9 @@ def isSDLAlreadyInstalled(path, buildForiOS, buildForiOSSimulator):
                       os.path.exists(os.path.join(installDir, "SDL2-static.lib")) and
                       os.path.exists(os.path.join(installDir, "include")))
     else:
-        print("...")
+        filesExist = (os.path.exists(os.path.join(installDir, "libSDL2.a")) and
+                      os.path.exists(os.path.join(installDir, "libSDL2main.a")) and
+                      os.path.exists(os.path.join(installDir, "include")))
 
     return filesExist
 
@@ -104,8 +106,6 @@ def install(path, buildForiOS, buildForiOSSimulator):
 
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
-
-    #shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "sdl", "include"))
 
 
 print("Installing SDL...")
