@@ -99,7 +99,7 @@ def build(buildiOS, tempDirPath):
         cmd = [cmakePath, ".."]
         runCmd(cmd)
 
-        cmd = [cmakePath, "--build", "."]
+        cmd = [cmakePath, "--build", ".", "--config", "Release"]
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -141,6 +141,9 @@ def saveResults(buildiOS, tempDirPath):
         buildDir = os.path.join(sdlPath, "build")
         includePath = os.path.join(sdlPath, "include")
 
+        if platform.system() == "Windows":
+            buildDir = os.path.join(buildDir, "Release")
+
         platformLibName = getPlatformLibName(False, False)
 
         destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
@@ -163,8 +166,11 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
                 zip.write(os.path.join(root, file), os.path.join("include", file))
 
         if platform.system() == "Windows":
-            zip.write(os.path.join(buildDir, "libSDL2.lib"), "libSDL2.lib")
-            zip.write(os.path.join(buildDir, "libSDL2main.lib"), "libSDL2main.lib")
+            zip.write(os.path.join(buildDir, "SDL2.dll"), "SDL2.dll")
+            zip.write(os.path.join(buildDir, "SDL2.lib"), "SDL2.lib")
+            zip.write(os.path.join(buildDir, "SDL2.exp"), "SDL2.exp")
+            zip.write(os.path.join(buildDir, "SDL2-static.lib"), "SDL2-static.lib")
+            zip.write(os.path.join(buildDir, "SDL2main.lib"), "SDL2main.lib")
         else:
             zip.write(os.path.join(buildDir, "libSDL2.a"), "libSDL2.a")
             zip.write(os.path.join(buildDir, "libSDL2main.a"), "libSDL2main.a")
