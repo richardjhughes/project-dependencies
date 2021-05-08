@@ -44,7 +44,7 @@ def getFullInstallDir(path, buildForiOS, buildForiOSSimulator):
     else:
         platformName = "unknown"
 
-    installDir = os.path.join(path, "libraries", "v8", platformName)
+    installDir = os.path.join(path, "v8", platformName)
 
     return installDir
 
@@ -56,7 +56,7 @@ def isv8AlreadyInstalled(path, buildForiOS, buildForiOSSimulator):
                   (os.path.exists(os.path.join(installDir, "libv8_libplatform.a")) or os.path.exists(os.path.join(installDir, "v8_libplatform.lib"))) and
                   (os.path.exists(os.path.join(installDir, "libv8_monolith.a")) or os.path.exists(os.path.join(installDir, "v8_monolith.lib"))) and
                   (os.path.exists(os.path.join(installDir, "libwee8.a")) or os.path.exists(os.path.join(installDir, "wee8.lib"))) and
-                  (os.path.exists(os.path.join(path, "libraries", "v8", "include"))))
+                  (os.path.exists(os.path.join(path, "v8", "include"))))
 
     return filesExist
 
@@ -91,7 +91,7 @@ def install(path, buildForiOS, buildForiOSSimulator):
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
 
-    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "libraries", "v8", "include"))
+    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "v8", "include"))
 
 
 print("Installing v8...")
