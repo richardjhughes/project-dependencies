@@ -12,7 +12,7 @@ sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/
 sdlDownloadURLDarwin = ""
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
-sdlDownloadURLLinux = ""
+sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_mixer_2.0.4/2.0.4_Linux.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
