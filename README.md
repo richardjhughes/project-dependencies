@@ -227,6 +227,10 @@ To build on Linux, you also need to install:
     ```
     sudo apt-get install autoconf
     ```
+* Freetype 6 Dev
+    ```
+    sudo apt-get install libfreetype6-dev
+    ```
 
 To build, run `build.py`:
 
