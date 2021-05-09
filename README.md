@@ -131,7 +131,7 @@ python3 install.py -p /path/to/install/directory
 
 ## SDL Image
 
-##### Correct as of 2021-05-08
+##### Correct as of 2021-05-09
 
 Using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
 
@@ -163,6 +163,12 @@ python3 build.py -ios
 ```
 
 Note: this only works when building on MacOS. Please use Xcode to perform the actual builds for `iOS` and `iOS Simulator`. The `-ios` flag will try to download the prebuild releases only.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
 
 ## License
 
