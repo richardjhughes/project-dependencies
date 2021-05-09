@@ -140,7 +140,7 @@ To build, you need to install:
 * Git
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
-For Linux:
+To build on Linux, to also need to install:
 * Autoconf
     ```
     sudo apt-get install autoconf
@@ -152,7 +152,9 @@ To build, run `build.py`:
 python3 build.py
 ```
 
-This will build for the platform you are running this script on, be it Windows, Linux or Mac.
+This will build for the platform you are running this script on, be it Linux or Mac.
+
+Note: v2.0.5 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio.
 
 ## License
 
