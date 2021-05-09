@@ -10,8 +10,8 @@ sdlGitURL = "https://github.com/libsdl-org/SDL_image.git"
 
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Windows.zip"
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Darwin.zip"
-sdlDownloadURLiOS = ""
-sdlDownloadURLiOSSimulator = ""
+sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_iOS.zip"
+sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_iOS_Simulator.zip"
 sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Linux.zip"
 
 gitPath = shutil.which("git")
@@ -88,14 +88,10 @@ def build(buildiOS, tempDirPath):
     cmd = [gitPath, "checkout", f"tags/release-{sdlVersion}", "-b", f"release-{sdlVersion}"]
     runCmd(cmd)
 
-    # if buildiOS:
-    #     # as of version 2.0.14, the cmake ios build isn't working
-    #     buildDir = os.path.join(os.getcwd(), "build-scripts")
-    #     os.chdir(buildDir)
-
-    #     cmd = ["./iosbuild.sh"]
-    #     runCmd(cmd)
-    # else:
+    if buildiOS:
+        print("Please build iOS and iOS Simulator manually from Xcode.")
+        return
+    
     cmd = [shPath, "autogen.sh"]
     runCmd(cmd)
 
@@ -121,27 +117,8 @@ def saveResults(buildiOS, tempDirPath):
     if buildiOS:
         print("Saving results for iOS...")
 
-        # # save ios
-        # includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "include", "SDL2")
-        # buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "arm64-ios", "lib")
-
-        # platformLibName = getPlatformLibName(True, False)
-
-        # destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
-
-        # saveBinaries(destLibDir, includePath, platformLibName, buildDir)
-
-        # # save ios simulator
-        # includePath = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "include", "SDL2")
-        # buildDir = os.path.join(tempDirPath, "SDL", "build-scripts", "platform", "x86_64-sim", "lib")
-
-        # platformLibName = getPlatformLibName(False, True)
-
-        # destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
-
-        # saveBinaries(destLibDir, includePath, platformLibName, buildDir)
-
-        print("Saved results for iOS.")
+        print("iOS builds should be done from Xcode.")
+        return
     else:
         print("Saving results for current platform...")
 
@@ -150,7 +127,8 @@ def saveResults(buildiOS, tempDirPath):
         includePath = os.path.join(sdlPath, "include", "SDL2")
 
         if platform.system() == "Windows":
-            buildDir = os.path.join(buildDir, "Release")
+            print("Windows builds should be done manually from Visual Studio.")
+            return
 
         platformLibName = getPlatformLibName(False, False)
 
