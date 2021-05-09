@@ -197,6 +197,20 @@ This will build for the platform you are running this script on, be it Linux or 
 
 Note: v2.0.5 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio. You many need to add the `DLL_EXPORT` preprocessor definition.
 
+To build for iOS, pass the `-ios` flag:
+
+```
+python3 build.py -ios
+```
+
+Note: this only works when building on MacOS. Please use Xcode to perform the actual builds for `iOS` and `iOS Simulator`. The `-ios` flag will try to download the prebuild releases only.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)
