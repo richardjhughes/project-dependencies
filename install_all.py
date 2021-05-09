@@ -205,6 +205,41 @@ def installSDLttf(path):
     print("Installed SDL ttf.")
 
 
+def installSDLmixer(path):
+    print("Installing SDL mixer...")
+
+    cwd = os.getcwd()
+    os.chdir("sdl_mixer")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
+
+    # # build ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+    #     runCmd(cmd)
+
+    # install standard
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    runCmd(cmd)
+
+    # # install ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+    #     runCmd(cmd)
+
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+    #     runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed SDL mixer.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -222,5 +257,7 @@ installSDLimage(installPath)
 installSDLnet(installPath)
 
 installSDLttf(installPath)
+
+installSDLmixer(installPath)
 
 print("Installed all dependencies.")
