@@ -12,7 +12,7 @@ sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/
 sdlDownloadURLDarwin = ""
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
-sdlDownloadURLLinux = ""
+sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Linux.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
@@ -154,7 +154,7 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
         if platform.system() == "Windows":
             print("Please create Windows zip file manually from Visual Studio build output.")
         else:
-            zip.write(os.path.join(buildDir, "libSDL2_image.a"), "libSDL2_image.a")
+            zip.write(os.path.join(buildDir, "libSDL2_net.a"), "libSDL2_net.a")
 
 
 def getPlatformLibName(buildiOS, buildiOSSimulator):
