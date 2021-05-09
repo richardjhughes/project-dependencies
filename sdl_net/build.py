@@ -5,14 +5,14 @@ import argparse
 import subprocess
 import zipfile
 
-sdlVersion = "2.0.5"
-sdlGitURL = "https://github.com/libsdl-org/SDL_image.git"
+sdlVersion = "2.0.1"
+sdlGitURL = "https://github.com/libsdl-org/SDL_net.git"
 
-sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Windows.zip"
-sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Darwin.zip"
-sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_iOS.zip"
-sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_iOS_Simulator.zip"
-sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Linux.zip"
+sdlDownloadURLWindows = ""
+sdlDownloadURLDarwin = ""
+sdlDownloadURLiOS = ""
+sdlDownloadURLiOSSimulator = ""
+sdlDownloadURLLinux = ""
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
@@ -78,7 +78,7 @@ def build(buildiOS, tempDirPath):
     cmd = [gitPath, "clone", f"{sdlGitURL}"]
     runCmd(cmd)
 
-    os.chdir(os.path.join(os.getcwd(), "SDL_image"))
+    os.chdir(os.path.join(os.getcwd(), "SDL_net"))
 
     # checkout the version we want
     cmd = [gitPath, "checkout", f"tags/release-{sdlVersion}", "-b", f"release-{sdlVersion}"]
@@ -247,7 +247,7 @@ def downloadBinary(url, output_path):
         return False
 
 
-print(f"Building SDL image version {sdlVersion}...")
+print(f"Building SDL net version {sdlVersion}...")
 
 args = configureArguments()
 
@@ -262,6 +262,6 @@ if doesNeedBuilding(args.build_ios):
 
         saveResults(args.build_ios, tempDirPath)
 else:
-    print("SDL image is already built...")
+    print("SDL net is already built...")
 
-print(f"Built SDL image version {sdlVersion}.")
+print(f"Built SDL net version {sdlVersion}.")

@@ -154,7 +154,7 @@ python3 build.py
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
-Note: v2.0.5 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio.
+Note: v2.0.5 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio. You many need to add the `DLL_EXPORT` preprocessor definition.
 
 To build for iOS, pass the `-ios` flag:
 
@@ -169,6 +169,33 @@ To install, run `install.py`:
 ```
 python3 install.py -p /path/to/install/directory
 ```
+
+## SDL Net
+
+##### Correct as of 2021-05-09
+
+Using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
+
+To build, you need to install:
+
+* Git
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build on Linux, to also need to install:
+* Autoconf
+    ```
+    sudo apt-get install autoconf
+    ```
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Linux or Mac.
+
+Note: v2.0.5 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio. You many need to add the `DLL_EXPORT` preprocessor definition.
 
 ## License
 
