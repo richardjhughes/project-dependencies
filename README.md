@@ -140,7 +140,7 @@ To build, you need to install:
 * Git
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
-To build on Linux, to also need to install:
+To build on Linux, you also need to install:
 * Autoconf
     ```
     sudo apt-get install autoconf
@@ -181,7 +181,7 @@ To build, you need to install:
 * Git
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
-To build on Linux, to also need to install:
+To build on Linux, you also need to install:
 * Autoconf
     ```
     sudo apt-get install autoconf
