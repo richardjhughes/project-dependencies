@@ -9,3 +9,5 @@ sdl_image/__temp/
 sdl_image/lib/
 sdl_net/__temp/
 sdl_net/lib/
+sdl_ttf/__temp/
+sdl_ttf/lib/
