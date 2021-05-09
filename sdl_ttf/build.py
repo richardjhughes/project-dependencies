@@ -8,7 +8,7 @@ import zipfile
 sdlVersion = "2.0.15"
 sdlGitURL = "https://github.com/libsdl-org/SDL_ttf.git"
 
-sdlDownloadURLWindows = ""
+sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_Windows.zip"
 sdlDownloadURLDarwin = ""
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
