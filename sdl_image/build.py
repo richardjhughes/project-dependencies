@@ -8,7 +8,7 @@ import zipfile
 sdlVersion = "2.0.5"
 sdlGitURL = "https://github.com/libsdl-org/SDL_image.git"
 
-sdlDownloadURLWindows = ""
+sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Windows.zip"
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_image_2.0.5/2.0.5_Darwin.zip"
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
@@ -65,6 +65,10 @@ def runCmdIgnoreError(cmd):
 
 def build(buildiOS, tempDirPath):
     print("Starting build...")
+
+    if platform.system() == "Windows":
+        print("Please build manually using Visual Studio.")
+        return
 
     if platform.system() != "Darwin" and buildiOS:
         print("Can only build iOS on MacOS.")
