@@ -256,6 +256,47 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+## SDL Mixer
+
+##### Correct as of 2021-05-09
+
+Using version 2.0.4: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.0.4
+
+To build, you need to install:
+
+* Git
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build on Linux, you also need to install:
+* Autoconf
+    ```
+    sudo apt-get install autoconf
+    ```
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Linux or Mac.
+
+Note: v2.0.4 is very difficult to build automatically on Windows. For now, please build manually using Visual Studio. You many need to add the `DLL_EXPORT` preprocessor definition.
+
+To build for iOS, pass the `-ios` flag:
+
+```
+python3 build.py -ios
+```
+
+Note: this only works when building on MacOS. Please use Xcode to perform the actual builds for `iOS` and `iOS Simulator`. The `-ios` flag will try to download the prebuild releases only.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)
