@@ -311,6 +311,20 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+## Nlohmann JSON
+
+##### Correct as of 2021-05-09
+
+Using version 3.9.1: https://github.com/nlohmann/json/releases/tag/v3.9.1
+
+This a source code only package, so no building required.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)

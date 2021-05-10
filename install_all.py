@@ -257,6 +257,23 @@ def installCatch2(path):
     print("Installed catch2.")
 
 
+def installNlohmannJson(path):
+    print("Installing nlohmann json...")
+
+    cwd = os.getcwd()
+    os.chdir("nlohmann_json")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed nlohmann json.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -278,5 +295,7 @@ installSDLttf(installPath)
 installSDLmixer(installPath)
 
 installCatch2(installPath)
+
+installNlohmannJson(installPath)
 
 print("Installed all dependencies.")
