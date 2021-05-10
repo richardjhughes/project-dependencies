@@ -9,7 +9,7 @@ sdlVersion = "2.0.4"
 sdlGitURL = "https://github.com/libsdl-org/SDL_mixer.git"
 
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_mixer_2.0.4/2.0.4_Windows.zip"
-sdlDownloadURLDarwin = ""
+sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_mixer_2.0.4/2.0.4_Darwin.zip"
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
 sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_mixer_2.0.4/2.0.4_Linux.zip"
