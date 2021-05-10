@@ -240,6 +240,23 @@ def installSDLmixer(path):
     print("Installed SDL mixer.")
 
 
+def installCatch2(path):
+    print("Installing catch2...")
+
+    cwd = os.getcwd()
+    os.chdir("catch2")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed catch2.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -259,5 +276,7 @@ installSDLnet(installPath)
 installSDLttf(installPath)
 
 installSDLmixer(installPath)
+
+installCatch2(installPath)
 
 print("Installed all dependencies.")
