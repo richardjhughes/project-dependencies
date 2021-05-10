@@ -10,8 +10,8 @@ sdlGitURL = "https://github.com/libsdl-org/SDL_net.git"
 
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Windows.zip"
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Darwin.zip"
-sdlDownloadURLiOS = ""
-sdlDownloadURLiOSSimulator = ""
+sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_iOS.zip"
+sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_iOS_Simulator.zip"
 sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Linux.zip"
 
 gitPath = shutil.which("git")
