@@ -9,7 +9,7 @@ sdlVersion = "2.0.1"
 sdlGitURL = "https://github.com/libsdl-org/SDL_net.git"
 
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Windows.zip"
-sdlDownloadURLDarwin = ""
+sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Darwin.zip"
 sdlDownloadURLiOS = ""
 sdlDownloadURLiOSSimulator = ""
 sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_net_2.0.1/2.0.1_Linux.zip"
