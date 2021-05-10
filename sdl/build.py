@@ -163,7 +163,7 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
     with zipfile.ZipFile(zipDir, "w") as zip:
         for root, dirs, files in os.walk(includePath):
             for file in files:
-                zip.write(os.path.join(root, file), os.path.join("include", file))
+                zip.write(os.path.join(root, file), os.path.join("include", "SDL2", file))
 
         if platform.system() == "Windows":
             zip.write(os.path.join(buildDir, "SDL2.dll"), "SDL2.dll")
