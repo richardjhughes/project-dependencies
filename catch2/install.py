@@ -67,7 +67,7 @@ def install(path):
     cmd = [gitPath, "clone", f"{gitURL}"]
     runCmd(cmd)
 
-    os.chdir(os.path.join(os.getcwd(), "catch2"))
+    os.chdir(os.path.join(os.getcwd(), "Catch2"))
 
     # checkout the version we want
     cmd = [gitPath, "checkout", f"tags/v{version}", "-b", f"v{version}"]
