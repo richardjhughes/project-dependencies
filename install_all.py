@@ -148,22 +148,22 @@ def installSDLnet(path):
     cmd = [f"{pythonPath}", f"{buildPath}"]
     runCmd(cmd)
 
-    # # build ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
-    #     runCmd(cmd)
+    # build ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        runCmd(cmd)
 
     # install standard
     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
     runCmd(cmd)
 
-    # # install ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
-    #     runCmd(cmd)
+    # install ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        runCmd(cmd)
 
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
-    #     runCmd(cmd)
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        runCmd(cmd)
 
     os.chdir(cwd)
 
@@ -183,22 +183,22 @@ def installSDLttf(path):
     cmd = [f"{pythonPath}", f"{buildPath}"]
     runCmd(cmd)
 
-    # # build ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
-    #     runCmd(cmd)
+    # build ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        runCmd(cmd)
 
     # install standard
     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
     runCmd(cmd)
 
-    # # install ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
-    #     runCmd(cmd)
+    # install ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        runCmd(cmd)
 
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
-    #     runCmd(cmd)
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        runCmd(cmd)
 
     os.chdir(cwd)
 
@@ -218,22 +218,22 @@ def installSDLmixer(path):
     cmd = [f"{pythonPath}", f"{buildPath}"]
     runCmd(cmd)
 
-    # # build ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
-    #     runCmd(cmd)
+    # build ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        runCmd(cmd)
 
     # install standard
     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
     runCmd(cmd)
 
-    # # install ios
-    # if platform.system() == "Darwin":
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
-    #     runCmd(cmd)
+    # install ios
+    if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        runCmd(cmd)
 
-    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
-    #     runCmd(cmd)
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        runCmd(cmd)
 
     os.chdir(cwd)
 
