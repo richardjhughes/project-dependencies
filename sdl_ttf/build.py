@@ -10,8 +10,8 @@ sdlGitURL = "https://github.com/libsdl-org/SDL_ttf.git"
 
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_Windows.zip"
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_Darwin.zip"
-sdlDownloadURLiOS = ""
-sdlDownloadURLiOSSimulator = ""
+sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_iOS.zip"
+sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_iOS_Simulator.zip"
 sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_ttf_2.0.15/2.0.15_Linux.zip"
 
 gitPath = shutil.which("git")
