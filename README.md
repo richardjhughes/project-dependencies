@@ -97,7 +97,7 @@ python3 install.py -p /path/to/install/directory/ -iossim
 
 ## SDL
 
-##### Correct as of 2021-05-06
+##### Correct as of 2021-05-11
 
 Using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
 
@@ -129,9 +129,16 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
+```
+
 ## SDL Image
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-11
 
 Using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
 
@@ -170,9 +177,16 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
+```
+
 ## SDL Net
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-11
 
 Using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
 
@@ -211,9 +225,16 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
+```
+
 ## SDL TTF
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-11
 
 Using version 2.0.15: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.0.15
 
@@ -256,9 +277,16 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
+```
+
 ## SDL Mixer
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-11
 
 Using version 2.0.4: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.0.4
 
@@ -297,6 +325,13 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
+```
+
 ## Catch2
 
 ##### Correct as of 2021-05-09
@@ -323,6 +358,56 @@ To install, run `install.py`:
 
 ```
 python3 install.py -p /path/to/install/directory
+```
+
+## libSodium
+
+##### Correct as of 2021-05-11
+
+Using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
+
+To build, you need to install:
+
+* Git
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build on Linux, you also need to install:
+* Autoconf
+    ```
+    sudo apt-get install autoconf
+    ```
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Linux or Mac.
+
+To build for iOS, pass the `-ios` flag:
+
+```
+python3 build.py -ios
+```
+
+To build for iOS Simulator, pass the `-iossim` flag:
+
+```
+python3 build.py -iossim
+```
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
+
+If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+
+```
+python3 install.py -p /path/to/install/directory -ios
+python3 install.py -p /path/to/install/directory -iossim
 ```
 
 ## License
