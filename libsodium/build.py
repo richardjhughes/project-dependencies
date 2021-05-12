@@ -9,8 +9,8 @@ version = "1.0.18"
 gitUrl = "https://github.com/jedisct1/libsodium.git"
 
 sdlDownloadURLWindows = ""
-sdlDownloadURLDarwin = ""
-sdlDownloadURLiOS = ""
+sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Darwin.zip"
+sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_iOS.zip"
 sdlDownloadURLLinux = ""
 
 gitPath = shutil.which("git")
