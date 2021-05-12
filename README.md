@@ -405,6 +405,33 @@ If running on MacOS, to install the iOS build, pass the `-ios` flag:
 python3 install.py -p /path/to/install/directory -ios
 ```
 
+## sqlite3
+
+##### Correct as of 2021-05-12
+
+Using version 3.35.5: https://github.com/sqlite/sqlite/releases/tag/version-3.35.5
+
+To build, you need to install:
+
+* Git
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Linux or Mac. Building on Windows is not supported.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
+
+Note: As this is a source only install, there are no platform flags.
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)
