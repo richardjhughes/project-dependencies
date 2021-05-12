@@ -17,3 +17,5 @@ catch2/__temp/
 nlohmann_json/__temp/
 libsodium/__temp/
 libsodium/lib/
+sqlite3/__temp/
+sqlite3/lib/
