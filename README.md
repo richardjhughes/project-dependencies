@@ -391,11 +391,7 @@ To build for iOS, pass the `-ios` flag:
 python3 build.py -ios
 ```
 
-To build for iOS Simulator, pass the `-iossim` flag:
-
-```
-python3 build.py -iossim
-```
+Note: This will build a universal iOS binary, which includes the iOS Simulator.
 
 To install, run `install.py`:
 
@@ -403,11 +399,10 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
-If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
+If running on MacOS, to install the iOS build, pass the `-ios` flag:
 
 ```
 python3 install.py -p /path/to/install/directory -ios
-python3 install.py -p /path/to/install/directory -iossim
 ```
 
 ## License

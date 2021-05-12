@@ -15,3 +15,5 @@ sdl_mixer/__temp/
 sdl_mixer/lib/
 catch2/__temp/
 nlohmann_json/__temp/
+libsodium/__temp/
+libsodium/lib/
