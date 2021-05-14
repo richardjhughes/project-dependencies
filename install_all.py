@@ -45,20 +45,20 @@ def installv8(path):
     cmd = [f"{pythonPath}", f"{installPath}", "-p", path]
     runCmd(cmd)
 
-    # if platform.system() == "Darwin":
-        # # iOS
-        # cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
-        # runCmd(cmd)
+    if platform.system() == "Darwin":
+        # iOS
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        runCmd(cmd)
 
-        # cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"]
-        # runCmd(cmd)
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"]
+        runCmd(cmd)
 
-        # # iOS Simulator
-        # cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"]
-        # runCmd(cmd)
+        # iOS Simulator
+        cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"]
+        runCmd(cmd)
 
-        # cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"]
-        # runCmd(cmd)
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"]
+        runCmd(cmd)
 
     os.chdir(cwd)
 
