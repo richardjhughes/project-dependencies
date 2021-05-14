@@ -274,6 +274,28 @@ def installNlohmannJson(path):
     print("Installed nlohmann json.")
 
 
+def installsqlite3(path):
+    print("Installing sqlite3...")
+
+    cwd = os.getcwd()
+    os.chdir("sqlite3")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    #installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
+
+    # # install
+    # cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    # runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed sqlite3.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -297,5 +319,7 @@ installSDLmixer(installPath)
 installCatch2(installPath)
 
 installNlohmannJson(installPath)
+
+installsqlite3(installPath)
 
 print("Installed all dependencies.")
