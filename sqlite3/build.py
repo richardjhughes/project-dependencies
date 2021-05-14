@@ -8,7 +8,7 @@ import zipfile
 version = "3.35.5"
 gitUrl = "https://github.com/sqlite/sqlite.git"
 
-downloadURL = ""
+downloadURL = "https://github.com/snowmeltarcade/project-dependencies/releases/download/sqlite3_3.35.5/3.35.5.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
