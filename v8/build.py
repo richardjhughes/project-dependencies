@@ -11,8 +11,8 @@ v8_version = "9.0"
 
 v8_windows_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Windows.zip"
 v8_darwin_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Darwin.zip"
-v8_darwin_ios_binary_url = ""
-v8_darwin_ios_simulator_binary_url = ""
+v8_darwin_ios_binary_url = "https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_9.0/v8_9.0_iOS.zip"
+v8_darwin_ios_simulator_binary_url = "https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_9.0/v8_9.0_iOS_Simulator.zip"
 v8_linux_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Linux.zip"
 
 v8_source_dir = os.path.join(cwd, "v8")
@@ -101,7 +101,7 @@ def setup_build(build_for_ios, build_for_ios_simulator):
     is_clang = "false" if platform.system() == "Windows" else "true"
 
     gn_settings_general = f"--args=is_component_build = false is_debug = false target_cpu = \"x64\" use_custom_libcxx = false v8_monolithic = true v8_use_external_startup_data = false is_clang = {is_clang}"
-    gn_settings_ios = f"--args=enable_ios_bitcode = true ios_deployment_target = 10 is_component_build = false is_debug = false target_cpu = \"arm64\" target_os = \"ios\" use_custom_libcxx = false use_xcode_clang = true v8_enable_i18n_support = false v8_monolithic = true v8_use_external_startup_data = false v8_enable_pointer_compression = false"
+    gn_settings_ios = f"--args=enable_ios_bitcode = false ios_deployment_target = 10 is_component_build = false is_debug = false target_cpu = \"arm64\" target_os = \"ios\" use_custom_libcxx = false use_xcode_clang = true v8_enable_i18n_support = false v8_monolithic = true v8_use_external_startup_data = false v8_enable_pointer_compression = false"
     gn_settings_ios_simulator = f"--args=enable_ios_bitcode = true ios_deployment_target = 10 is_component_build = false is_debug = false target_cpu = \"x64\" target_os = \"ios\" use_custom_libcxx = false use_xcode_clang = true v8_enable_i18n_support = false v8_monolithic = true v8_use_external_startup_data = false v8_enable_pointer_compression = false"
 
     is_darwin = platform.system() == "Darwin"

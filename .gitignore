@@ -19,3 +19,4 @@ libsodium/__temp/
 libsodium/lib/
 sqlite3/__temp/
 sqlite3/lib/
+v8/.vscode/
