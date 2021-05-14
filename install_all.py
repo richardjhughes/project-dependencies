@@ -274,6 +274,28 @@ def installNlohmannJson(path):
     print("Installed nlohmann json.")
 
 
+def installlibSodium(path):
+    print("Installing libSodium...")
+
+    cwd = os.getcwd()
+    os.chdir("libsodium")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    #installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
+
+    # # install
+    # cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    # runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed libSodium.")
+
+
 def installsqlite3(path):
     print("Installing sqlite3...")
 
@@ -319,6 +341,8 @@ installSDLmixer(installPath)
 installCatch2(installPath)
 
 installNlohmannJson(installPath)
+
+installlibSodium(installPath)
 
 installsqlite3(installPath)
 
