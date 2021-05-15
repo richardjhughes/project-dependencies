@@ -376,6 +376,10 @@ To build on Linux, you also need to install:
     ```
     sudo apt-get install autoconf
     ```
+* libtool
+    ```
+    sudo apt-get install libtool
+    ```
 
 To build, run `build.py`:
 

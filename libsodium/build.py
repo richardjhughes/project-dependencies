@@ -77,7 +77,8 @@ def build(buildiOS, tempDirPath):
     cmd = [gitPath, "clone", f"{gitUrl}"]
     runCmd(cmd)
 
-    os.chdir(os.path.join(os.getcwd(), "libsodium"))
+    sourceDir = os.path.join(os.getcwd(), "libsodium")
+    os.chdir(sourceDir)
 
     # checkout the version we want
     cmd = [gitPath, "checkout", f"tags/{version}", "-b", f"{version}"]
@@ -92,6 +93,20 @@ def build(buildiOS, tempDirPath):
         else:
             cmd = [shPath, "./dist-build/osx.sh"]
         
+        runCmd(cmd)
+    elif platform.system() == "Linux":
+        installDir = os.path.join(sourceDir, "libsodium-linux")
+
+        cmd = [shPath, "./configure", f"--prefix={installDir}"]
+        runCmd(cmd)
+
+        cmd = [makePath]
+        runCmd(cmd)
+
+        cmd = [makePath, "check"]
+        runCmd(cmd)
+
+        cmd = [makePath, "install"]
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -109,6 +124,8 @@ def saveResults(buildiOS, tempDirPath):
             outputFolder = "libsodium-ios"
         else:
             outputFolder = "libsodium-osx"
+    elif platform.system() == "Linux":
+        outputFolder = "libsodium-linux"
 
     resultsPath = os.path.join(tempDirPath, "libsodium", outputFolder)
 
