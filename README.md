@@ -362,7 +362,7 @@ python3 install.py -p /path/to/install/directory
 
 ## libSodium
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-14
 
 Using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
 
@@ -384,6 +384,8 @@ python3 build.py
 ```
 
 This will build for the platform you are running this script on, be it Linux or Mac.
+
+Note: Please manually build on Windows using Visual Studio. See the MSVC packages in `builds -> msvc`.
 
 To build for iOS, pass the `-ios` flag:
 

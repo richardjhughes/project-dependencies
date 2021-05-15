@@ -69,6 +69,10 @@ def build(buildiOS, tempDirPath):
         print("Can only build iOS on MacOS.")
         return
 
+    if platform.system() == "Windows":
+        print("Please build manually on Windows.")
+        return
+
     createDirectories(tempDirPath)
 
     os.chdir(tempDirPath)
@@ -91,15 +95,18 @@ def build(buildiOS, tempDirPath):
             cmd = [shPath, "./dist-build/ios.sh"]
         else:
             cmd = [shPath, "./dist-build/osx.sh"]
-        
         runCmd(cmd)
-
+    
     os.chdir(cwd)
 
     print("Finished build.")
 
 
 def saveResults(buildiOS, tempDirPath):
+    if platform.system() == "Windows":
+        # building on Windows is manual
+        return
+
     print("Saving results...")
 
     outputFolder = ""
