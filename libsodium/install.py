@@ -54,6 +54,11 @@ def isSDLAlreadyInstalled(path, buildForiOS):
     if platform.system() == "Windows":
         filesExist = (os.path.exists(os.path.join(installDir, "lib", "libsodium.lib")) and
                       os.path.exists(os.path.join(installDir, "include")))
+    elif platform.system() == "Linux":
+        filesExist = (os.path.exists(os.path.join(installDir, "lib", "libsodium.a")) and
+                      os.path.exists(os.path.join(installDir, "lib", "libsodium.la")) and
+                      os.path.exists(os.path.join(installDir, "lib", "libsodium.so")) and
+                      os.path.exists(os.path.join(installDir, "include")))
     else:
         filesExist = (os.path.exists(os.path.join(installDir, "lib", "libsodium.a")) and
                       os.path.exists(os.path.join(installDir, "lib", "libsodium.dylib")) and
