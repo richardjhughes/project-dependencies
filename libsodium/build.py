@@ -11,7 +11,7 @@ gitUrl = "https://github.com/jedisct1/libsodium.git"
 sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Windows.zip"
 sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Darwin.zip"
 sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_iOS.zip"
-sdlDownloadURLLinux = ""
+sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Linux.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
@@ -81,7 +81,8 @@ def build(buildiOS, tempDirPath):
     cmd = [gitPath, "clone", f"{gitUrl}"]
     runCmd(cmd)
 
-    os.chdir(os.path.join(os.getcwd(), "libsodium"))
+    sourceDir = os.path.join(os.getcwd(), "libsodium")
+    os.chdir(sourceDir)
 
     # checkout the version we want
     cmd = [gitPath, "checkout", f"tags/{version}", "-b", f"{version}"]
@@ -96,7 +97,21 @@ def build(buildiOS, tempDirPath):
         else:
             cmd = [shPath, "./dist-build/osx.sh"]
         runCmd(cmd)
-    
+    elif platform.system() == "Linux":
+        installDir = os.path.join(sourceDir, "libsodium-linux")
+
+        cmd = [shPath, "./configure", f"--prefix={installDir}"]
+        runCmd(cmd)
+
+        cmd = [makePath]
+        runCmd(cmd)
+
+        cmd = [makePath, "check"]
+        runCmd(cmd)
+
+        cmd = [makePath, "install"]
+        runCmd(cmd)
+
     os.chdir(cwd)
 
     print("Finished build.")
@@ -116,6 +131,8 @@ def saveResults(buildiOS, tempDirPath):
             outputFolder = "libsodium-ios"
         else:
             outputFolder = "libsodium-osx"
+    elif platform.system() == "Linux":
+        outputFolder = "libsodium-linux"
 
     resultsPath = os.path.join(tempDirPath, "libsodium", outputFolder)
 
