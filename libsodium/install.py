@@ -71,7 +71,7 @@ def getPlatformName(buildForiOS):
     platformName = platform.system()
 
     if buildForiOS:
-        platformName = "ios"
+        platformName = "iOS"
 
     return platformName
 
