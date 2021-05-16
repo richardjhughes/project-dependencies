@@ -8,10 +8,10 @@ add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 target_sources(
     "${PROJECT_NAME}"
     PUBLIC INTERFACE
-        sqlite3.h
-        sqlite3ext.h
+        include/sqlite3.h
+        include/sqlite3ext.h
     PRIVATE INTERFACE
-        sqlite3.c
+        src/sqlite3.c
 )
 
 target_include_directories(
