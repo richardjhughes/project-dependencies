@@ -14,6 +14,15 @@ target_sources(
         src/sqlite3.c
 )
 
+# 2021-05-16 - ignore the warnings sqlite3 currently has
+target_compile_options(
+    "${PROJECT_NAME}"
+    PUBLIC INTERFACE
+        "-Wno-unused-parameter"
+        "-Wno-missing-field-initializers"
+        "-Wno-sign-compare"
+)
+
 target_include_directories(
     ${PROJECT_NAME}
     INTERFACE
