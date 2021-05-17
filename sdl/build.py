@@ -171,6 +171,10 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
             zip.write(os.path.join(buildDir, "SDL2.exp"), "SDL2.exp")
             zip.write(os.path.join(buildDir, "SDL2-static.lib"), "SDL2-static.lib")
             zip.write(os.path.join(buildDir, "SDL2main.lib"), "SDL2main.lib")
+        elif platform.system() == "Darwin":
+            zip.write(os.path.join(buildDir, "libSDL2-2.0.dylib"), "libSDL2.dylib")
+            zip.write(os.path.join(buildDir, "libSDL2.a"), "libSDL2.a")
+            zip.write(os.path.join(buildDir, "libSDL2main.a"), "libSDL2main.a")
         else:
             zip.write(os.path.join(buildDir, "libSDL2.a"), "libSDL2.a")
             zip.write(os.path.join(buildDir, "libSDL2main.a"), "libSDL2main.a")
