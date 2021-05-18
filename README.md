@@ -436,7 +436,32 @@ To install, run `install.py`:
 python3 install.py -p /path/to/install/directory
 ```
 
-Note: As this is a source only install, there are no platform flags.
+## glew
+
+##### Correct as of 2021-05-17
+
+Using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
+
+To build, you need to install:
+
+* CMake
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+
+To build, run `build.py`:
+
+```
+python3 build.py
+```
+
+This will build for the platform you are running this script on, be it Linux, Mac or Windows.
+
+Note: There is no iOS build, as glew is not used on iOS.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory
+```
 
 ## License
 
