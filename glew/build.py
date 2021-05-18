@@ -11,7 +11,7 @@ version = "2.2.0"
 # generated source
 gitUrl = "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip"
 
-downloadURLWindows = ""
+downloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_2.2.0/2.2.0_Windows.zip"
 downloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_2.2.0/2.2.0_Darwin.zip"
 downloadURLLinux = ""
 
