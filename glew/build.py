@@ -6,20 +6,20 @@ import subprocess
 import zipfile
 
 version = "2.2.0"
-gitUrl = "https://github.com/nigels-com/glew.git"
+# the git tree does not contain the generated source
+# it is far simpler to build from the release package which does contain the
+# generated source
+gitUrl = "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip"
 
-sdlDownloadURLWindows = ""
-sdlDownloadURLDarwin = ""
-sdlDownloadURLiOS = ""
-sdlDownloadURLLinux = ""
+downloadURLWindows = ""
+downloadURLDarwin = ""
+downloadURLLinux = ""
 
-gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
 cmakePath = shutil.which("cmake")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-ios", "--ios", action="store_true", required=False, help="Build iOS and iOS Simulator universal binaries. Note: Only valid for use when building on MacOS")
     args = parser.parse_args()
 
     return args
@@ -61,36 +61,34 @@ def runCmdIgnoreError(cmd):
         return False
 
 
-def build(buildiOS, tempDirPath):
+def getZipOutputPath(tempDirPath):
+    path = os.path.join(tempDirPath, "glew_source")
+    return path
+
+def getBuildPath(zipOutputPath):
+    path = os.path.join(zipOutputPath, f"glew-{version}", "build", "cmake", "build")
+    return path
+
+
+def build(tempDirPath):
     print("Starting build...")
-
-    if platform.system() != "Darwin" and buildiOS:
-        print("Can only build iOS on MacOS.")
-        return
-
-    if platform.system() == "Windows":
-        print("Please build manually on Windows.")
-        return
 
     createDirectories(tempDirPath)
 
     os.chdir(tempDirPath)
 
-    # get the latest code
-    cmd = [gitPath, "clone", f"{gitUrl}"]
+    # get the code
+    zipPath = os.path.join(tempDirPath, "glew.zip")
+    cmd = [curlPath, "--create-dirs", "-Lo", f"{zipPath}", f"{gitUrl}"]
     runCmd(cmd)
 
-    sourceDir = os.path.join(os.getcwd(), "glew")
-    os.chdir(sourceDir)
+    zipOutputPath = getZipOutputPath(tempDirPath)
+    with zipfile.ZipFile(zipPath, "r") as zip:
+        zip.extractall(zipOutputPath)
 
-    # checkout the version we want
-    cmd = [gitPath, "checkout", f"tags/glew-{version}", "-b", f"glew-{version}"]
-    runCmd(cmd)
+    os.chdir(zipOutputPath)
 
-    cmakeDir = os.path.join(sourceDir, "build", "cmake")
-    os.chdir(cmakeDir)
-
-    buildDir = os.path.join(cmakeDir, "build")
+    buildDir = getBuildPath(zipOutputPath)
     createDirectories(buildDir)
 
     os.chdir(buildDir)
@@ -106,40 +104,27 @@ def build(buildiOS, tempDirPath):
     print("Finished build.")
 
 
-def saveResults(buildiOS, tempDirPath):
-    if platform.system() == "Windows":
-        # building on Windows is manual
-        return
-
+def saveResults(tempDirPath):
     print("Saving results...")
 
-    outputFolder = ""
+    zipOutputPath = getZipOutputPath(tempDirPath)
+    buildDir = getBuildPath(zipOutputPath)
 
-    if platform.system() == "Darwin":
-        if buildiOS:
-            outputFolder = "libsodium-ios"
-        else:
-            outputFolder = "libsodium-osx"
-    elif platform.system() == "Linux":
-        outputFolder = "libsodium-linux"
-
-    resultsPath = os.path.join(tempDirPath, "libsodium", outputFolder)
-
-    platformLibName = getPlatformLibName(buildiOS)
+    platformLibName = getPlatformLibName()
 
     destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
+    includeDir = os.path.join(tempDirPath, "glew_source", f"glew-{version}", "include", "GL")
 
-    saveBinaries(destLibDir, platformLibName, resultsPath)
+    saveBinaries(destLibDir, platformLibName, buildDir, includeDir)
 
     print("Saved results.")
 
 
-def saveBinaries(destLibDir, platformLibName, resultsPath):
+def saveBinaries(destLibDir, platformLibName, buildDir, includeDir):
     createDirectories(destLibDir)
 
-    resultsLibDir = os.path.join(resultsPath, "lib")
-    resultsIncludeDir = os.path.join(resultsPath, "include")
-    resultsIncludesDir = os.path.join(resultsIncludeDir, "sodium")
+    resultsLibDir = os.path.join(buildDir, "lib")
+    resultsBinDir = os.path.join(buildDir, "bin")
 
     zipDir = getZipPath(destLibDir, platformLibName)
 
@@ -148,18 +133,16 @@ def saveBinaries(destLibDir, platformLibName, resultsPath):
             for file in files:
                 zip.write(os.path.join(root, file), os.path.join("lib", file))
 
-        zip.write(os.path.join(resultsIncludeDir, "sodium.h"), os.path.join("include", "sodium.h"))
-
-        for root, dirs, files in os.walk(resultsIncludesDir):
+        for root, dirs, files in os.walk(resultsBinDir):
             for file in files:
-                zip.write(os.path.join(root, file), os.path.join("include", "sodium", file))
+                zip.write(os.path.join(root, file), os.path.join("bin", file))
+
+        for root, dirs, files in os.walk(includeDir):
+            for file in files:
+                zip.write(os.path.join(root, file), os.path.join("include", "GL", file))
 
 
-def getPlatformLibName(buildiOS):
-    if platform.system() == "Darwin":
-        if buildiOS:
-            return "iOS"
-
+def getPlatformLibName():
     return platform.system()
 
 
@@ -167,8 +150,8 @@ def getZipPath(destLibDir, platformLibName):
     return os.path.join(destLibDir, f"{version}_{platformLibName}.zip")
 
 
-def doesNeedBuilding(buildiOS):
-    platformLibName = getPlatformLibName(buildiOS)
+def doesNeedBuilding():
+    platformLibName = getPlatformLibName()
 
     destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
 
@@ -179,33 +162,18 @@ def doesNeedBuilding(buildiOS):
     return not isBuilt
 
 
-def tryAndDownloadBinaries(buildiOS):
-    
-    # as we build both ios and ios simulator together, try and
-    # download them together
-    if platform.system() == "Darwin":
-        result = downloadBinaries(buildiOS)
-        return result
-    else:
-        result = downloadBinaries(False)
-        return result
-
-
-def downloadBinaries(buildiOS):
+def downloadBinaries():
     print("Trying to download pre-built binaries...")
 
     url = ""
 
     systemName = platform.system()
     if systemName == "Windows":
-        url = sdlDownloadURLWindows
+        url = downloadURLWindows
     elif systemName == "Darwin":
-        if buildiOS:
-            url = sdlDownloadURLiOS
-        else:
-            url = sdlDownloadURLDarwin
+            url = downloadURLDarwin
     elif systemName == "Linux":
-        url = sdlDownloadURLLinux
+        url = downloadURLLinux
     else:
         print(f"Unknown system name: {systemName}")
         return False
@@ -213,7 +181,7 @@ def downloadBinaries(buildiOS):
     if url == "":
         return False
 
-    platformLibName = getPlatformLibName(buildiOS)
+    platformLibName = getPlatformLibName()
 
     destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
     zipDir = getZipPath(destLibDir, platformLibName)
@@ -245,14 +213,14 @@ args = configureArguments()
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")
 
-# if doesNeedBuilding(args.ios):
-#     if tryAndDownloadBinaries(args.ios):
-#         print("Downloaded pre-built binaries.")
-#     else:
-build(args.ios, tempDirPath)
+if doesNeedBuilding():
+    if downloadBinaries():
+        print("Downloaded pre-built binaries.")
+    else:
+        build(tempDirPath)
 
-#         saveResults(args.ios, tempDirPath)
-# else:
-#     print("glew is already built...")
+        saveResults(tempDirPath)
+else:
+    print("glew is already built...")
 
 print(f"Built glew version {version}.")
