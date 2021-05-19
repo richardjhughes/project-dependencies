@@ -50,6 +50,7 @@ def isAlreadyInstalled(path):
     if platform.system() == "Windows":
         filesExist = (os.path.exists(os.path.join(installDir, "lib", "glew32.lib")) and
                       os.path.exists(os.path.join(installDir, "lib", "libglew32.lib")) and
+                      os.path.exists(os.path.join(installDir, "bin", "glew32.dll")) and
                       os.path.exists(os.path.join(installDir, "include", "GL")))
     elif platform.system() == "Darwin":
         filesExist = (os.path.exists(os.path.join(installDir, "lib", "libGLEW.a")) and
