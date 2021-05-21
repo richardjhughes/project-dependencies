@@ -294,6 +294,9 @@ def installlibSodium(path):
     # install ios
     # libSodium does not have a separate ios simulator build
     if platform.system() == "Darwin":
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        runCmd(cmd)
+
         cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
         runCmd(cmd)
 
