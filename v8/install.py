@@ -20,7 +20,7 @@ def createDirectories(path):
     print(f"Creating directory: {path}")
 
     try:
-        os.makedirs(path)
+        os.makedirs(path, exist_ok=True)
     except OSError as error:
         print(error)
 
@@ -91,7 +91,7 @@ def install(path, buildForiOS, buildForiOSSimulator):
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
 
-    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "v8", "include"))
+    shutil.copytree(os.path.join(os.getcwd(), "include"), os.path.join(path, "v8", "include"), dirs_exist_ok=True)
 
 
 print("Installing v8...")

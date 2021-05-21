@@ -54,7 +54,7 @@ def run_cmd_ignore_error(cmd):
 
 def make_dir(dir):
     try:
-        os.makedirs(dir, 0o755)
+        os.makedirs(dir, 0o755, exist_ok=True)
     except OSError:
         print(f"Failed to create dir: {dir}")
     else:
