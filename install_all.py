@@ -246,7 +246,12 @@ def installCatch2(path):
     cwd = os.getcwd()
     os.chdir("catch2")
 
+    buildPath = os.path.join(os.getcwd(), "build.py")
     installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
 
     # install
     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
