@@ -8,7 +8,7 @@ import zipfile
 version = "2.13.6"
 gitUrl = "https://github.com/catchorg/Catch2.git"
 
-downloadURL = ""
+downloadURL = "https://github.com/snowmeltarcade/project-dependencies/releases/download/catch2_2.13.6/2.13.6.zip"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
