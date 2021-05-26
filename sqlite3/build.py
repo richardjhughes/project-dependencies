@@ -26,7 +26,7 @@ def createDirectories(path):
     print(f"Creating directory: {path}")
 
     try:
-        os.makedirs(path)
+        os.makedirs(path, )
     except OSError as error:
         print(error)
 
@@ -112,8 +112,8 @@ def saveBinaries(supportingFilesPath, destLibDir, resultsPath):
 
     with zipfile.ZipFile(zipDir, "w") as zip:
         zip.write(os.path.join(supportingFilesPath, "CMakeLists.txt"), os.path.join("CMakeLists.txt"))
-        zip.write(os.path.join(resultsPath, "sqlite3.h"), os.path.join("include", "sqlite3.h"))
-        zip.write(os.path.join(resultsPath, "sqlite3ext.h"), os.path.join("include", "sqlite3ext.h"))
+        zip.write(os.path.join(resultsPath, "sqlite3.h"), os.path.join("sqlite3.h"))
+        zip.write(os.path.join(resultsPath, "sqlite3ext.h"), os.path.join("sqlite3ext.h"))
         zip.write(os.path.join(resultsPath, "sqlite3.c"), os.path.join("src", "sqlite3.c"))
 
 

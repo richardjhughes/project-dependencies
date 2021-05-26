@@ -34,8 +34,8 @@ def isAlreadyInstalled(path):
 
     filesExist = (os.path.exists(os.path.join(installDir, "CMakeLists.txt")) and
                   os.path.exists(os.path.join(installDir, "src", "sqlite3.c")) and
-                  os.path.exists(os.path.join(installDir, "include", "sqlite3.h")) and
-                  os.path.exists(os.path.join(installDir, "include", "sqlite3ext.h")))
+                  os.path.exists(os.path.join(installDir, "sqlite3.h")) and
+                  os.path.exists(os.path.join(installDir, "sqlite3ext.h")))
 
     return filesExist
 
