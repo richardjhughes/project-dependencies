@@ -24,3 +24,5 @@ sqlite3/lib/
 v8/.vscode/
 glew/lib/
 glew/__temp/
+ninja/lib/
+ninja/__temp/

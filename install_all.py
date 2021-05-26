@@ -354,6 +354,28 @@ def installGLEW(path):
     print("Installed GLEW.")
 
 
+def installNinja(path):
+    print("Installing Ninja...")
+
+    cwd = os.getcwd()
+    os.chdir("ninja")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"]
+    runCmd(cmd)
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed Ninja.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -383,5 +405,7 @@ installlibSodium(installPath)
 installsqlite3(installPath)
 
 installGLEW(installPath)
+
+installNinja(installPath)
 
 print("Installed all dependencies.")
