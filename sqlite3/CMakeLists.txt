@@ -22,6 +22,8 @@ target_compile_options(
         "-Wno-missing-field-initializers"
         "-Wno-sign-compare"
         "-Wno-language-extension-token"
+        "-Wno-deprecated-declarations"
+        "-Wno-unused-variable"
 )
 
 target_include_directories(
