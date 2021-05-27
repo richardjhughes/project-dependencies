@@ -3,6 +3,9 @@ import shutil
 import platform
 import argparse
 import zipfile
+import subprocess
+
+chmodPath = shutil.which("chmod")
 
 version = "1.10.2"
 
@@ -21,6 +24,11 @@ def createDirectories(path):
         os.makedirs(path)
     except OSError as error:
         print(error)
+
+
+def runCmd(cmd, cwd=None):
+    print(f"Running command: {cmd}")
+    subprocess.run(cmd, cwd=cwd)
 
 
 def getFullInstallDir(path):
@@ -81,6 +89,13 @@ def install(path):
 
     with zipfile.ZipFile(zipPath, "r") as zip:
         zip.extractall(installDir)
+
+    # random executable files from the internet may not have
+    # permissions to execute
+    if platform.system() == "Darwin" or platform.system() == "Linux":
+        exePath = os.path.join(installDir, "ninja")
+        cmd = [chmodPath, "+x", exePath]
+        runCmd(cmd)
 
 
 print("Installing Ninja...")
