@@ -19,15 +19,17 @@ python3 install_all.py -p /path/to/project/
 
 ## Clang
 
-##### Correct as of: 2021-05-04
+##### Correct as of: 2021-05-30
 
-Using version 12: https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0
+By default, using version 12: https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory/
+python3 install.py -p /path/to/install/directory/ -v version
 ```
+
+`-v` is optional.
 
 If using Linux, please note the Ubuntu 20.04 build of clang is downloaded.
 

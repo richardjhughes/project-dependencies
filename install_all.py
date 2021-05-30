@@ -51,9 +51,13 @@ def installClang(path, deps):
 
     print("Installing clang...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['clang']}"]
+
     installPath = os.path.join(os.getcwd(), "clang", "install.py")
 
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", path]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", path] + version
     runCmd(cmd)
 
     print("Installed clang.")

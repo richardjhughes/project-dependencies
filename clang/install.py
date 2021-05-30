@@ -8,6 +8,7 @@ import zipfile
 def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", action="store", required=True, help="path to install in")
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     args = parser.parse_args()
 
     return args
@@ -36,7 +37,7 @@ def runCmd(cmd, cwd=None):
     subprocess.run(cmd, cwd=cwd)
 
 
-def install(path):
+def install(path, version):
     print("Starting install...")
 
     installDir = getFullInstallDir(path)
@@ -47,12 +48,15 @@ def install(path):
 
     osName = platform.system()
 
+    if version is None or len(version) <= 0:
+        version = "12.0.0"
+
     if osName == "Windows":
-        installForWindows(installDir)
+        installForWindows(installDir, version)
     elif osName == "Darwin":
-        installForDarwin(installDir)
+        installForDarwin(installDir, version)
     elif osName == "Linux":
-        installForLinux(installDir)
+        installForLinux(installDir, version)
     else:
         print("Unknown OS: " + osName)
 
@@ -73,12 +77,12 @@ def getFullInstallDir(path):
     else:
         platformName = "unknown"
 
-    installDir = os.path.join(path, "clang-12", platformName)
+    installDir = os.path.join(path, "clang", platformName)
 
     return installDir
 
 
-def installForWindows(installDir):
+def installForWindows(installDir, version):
     print("Installing for Windows...")
 
     tempDir = os.path.join(os.getcwd(), "__temp")
@@ -91,7 +95,7 @@ def installForWindows(installDir):
     filename = "clang.zip"
 
     # download clang
-    cmd = ["curl", "-L", "https://github.com/richardjhughes/project-dependencies/releases/download/LLVM_12.0.0/LLVM_12.0.0_Windows.zip", "-o", filename]
+    cmd = ["curl", "-L", f"https://github.com/richardjhughes/project-dependencies/releases/download/LLVM_{version}/LLVM_{version}_Windows.zip", "-o", filename]
     runCmd(cmd)
 
     # install
@@ -104,7 +108,7 @@ def installForWindows(installDir):
     print("Installed for Windows.")
 
 
-def installForDarwin(installDir):
+def installForDarwin(installDir, version):
     print("Installing for Darwin...")
 
     tempDir = os.path.join(os.getcwd(), "__temp")
@@ -117,7 +121,7 @@ def installForDarwin(installDir):
     filename = "clang.tar.xf"
 
     # download clang
-    cmd = ["curl", "-L", "https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-apple-darwin.tar.xz", "-o", filename]
+    cmd = ["curl", "-L", f"https://github.com/llvm/llvm-project/releases/download/llvmorg-{version}/clang+llvm-{version}-x86_64-apple-darwin.tar.xz", "-o", filename]
     runCmd(cmd)
 
     # install
@@ -130,7 +134,7 @@ def installForDarwin(installDir):
     print("Installed for Darwin.")
 
 
-def installForLinux(installDir):
+def installForLinux(installDir, version):
     print("Installing for Linux...")
 
     tempDir = os.path.join(os.getcwd(), "__temp")
@@ -143,7 +147,7 @@ def installForLinux(installDir):
     filename = "clang.tar.xf"
 
     # download clang
-    cmd = ["curl", "-L", "https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz", "-o", filename]
+    cmd = ["curl", "-L", f"https://github.com/llvm/llvm-project/releases/download/llvmorg-{version}/clang+llvm-{version}-x86_64-linux-gnu-ubuntu-20.04.tar.xz", "-o", filename]
     runCmd(cmd)
 
     # install
@@ -172,6 +176,6 @@ args = configureArguments()
 if isClangAlreadyInstalled(args.path):
     print("Clang already installed.")
 else:
-    install(args.path)
+    install(args.path, args.version)
 
 print("Installed clang.")
