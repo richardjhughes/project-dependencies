@@ -1,4 +1,5 @@
 import os
+import json
 import shutil
 import platform
 import argparse
@@ -19,7 +20,35 @@ def runCmd(cmd, cwd=None):
     subprocess.run(cmd, cwd=cwd)
 
 
-def installClang(path):
+def getProjectDependencies(path):
+    print("Checking for project dependencies...")
+
+    fileName = "libraries.json"
+    filePath = os.path.join(path, fileName)
+
+    if not os.path.exists(filePath) or not os.path.isfile(filePath):
+        print(f"Failed to find `{fileName}`.")
+        return {}
+
+    dependencies = {}
+
+    dependenciesFile = open(filePath)
+    dependenciesJson = json.load(dependenciesFile)
+
+    for d in dependenciesJson["dependencies"]:
+        dependencies[d["name"]] = d["version"]
+
+    dependenciesFile.close()
+
+    print("Checked.")
+
+    return dependencies
+
+
+def installClang(path, deps):
+    if len(deps) > 0 and not "clang" in deps.keys():
+        return
+
     print("Installing clang...")
 
     installPath = os.path.join(os.getcwd(), "clang", "install.py")
@@ -30,7 +59,10 @@ def installClang(path):
     print("Installed clang.")
 
 
-def installv8(path):
+def installv8(path, deps):
+    if len(deps) > 0 and not "v8" in deps.keys():
+        return
+
     print("Installing v8...")
 
     cwd = os.getcwd()
@@ -65,7 +97,10 @@ def installv8(path):
     print("Installed v8.")
 
 
-def installSDL(path):
+def installSDL(path, deps):
+    if len(deps) > 0 and not "sdl" in deps.keys():
+        return
+
     print("Installing SDL...")
 
     cwd = os.getcwd()
@@ -100,7 +135,10 @@ def installSDL(path):
     print("Installed SDL.")
 
 
-def installSDLimage(path):
+def installSDLimage(path, deps):
+    if len(deps) > 0 and not "sdl_image" in deps.keys():
+        return
+
     print("Installing SDL image...")
 
     cwd = os.getcwd()
@@ -135,7 +173,10 @@ def installSDLimage(path):
     print("Installed SDL image.")
 
 
-def installSDLnet(path):
+def installSDLnet(path, deps):
+    if len(deps) > 0 and not "sdl_net" in deps.keys():
+        return
+
     print("Installing SDL net...")
 
     cwd = os.getcwd()
@@ -170,7 +211,10 @@ def installSDLnet(path):
     print("Installed SDL net.")
 
 
-def installSDLttf(path):
+def installSDLttf(path, deps):
+    if len(deps) > 0 and not "sdl_ttf" in deps.keys():
+        return
+
     print("Installing SDL ttf...")
 
     cwd = os.getcwd()
@@ -205,7 +249,10 @@ def installSDLttf(path):
     print("Installed SDL ttf.")
 
 
-def installSDLmixer(path):
+def installSDLmixer(path, deps):
+    if len(deps) > 0 and not "sdl_mixer" in deps.keys():
+        return
+
     print("Installing SDL mixer...")
 
     cwd = os.getcwd()
@@ -240,7 +287,10 @@ def installSDLmixer(path):
     print("Installed SDL mixer.")
 
 
-def installCatch2(path):
+def installCatch2(path, deps):
+    if len(deps) > 0 and not "catch2" in deps.keys():
+        return
+
     print("Installing catch2...")
 
     cwd = os.getcwd()
@@ -262,7 +312,10 @@ def installCatch2(path):
     print("Installed catch2.")
 
 
-def installNlohmannJson(path):
+def installNlohmannJson(path, deps):
+    if len(deps) > 0 and not "nlohmann_json" in deps.keys():
+        return
+
     print("Installing nlohmann json...")
 
     cwd = os.getcwd()
@@ -279,7 +332,10 @@ def installNlohmannJson(path):
     print("Installed nlohmann json.")
 
 
-def installlibSodium(path):
+def installlibSodium(path, deps):
+    if len(deps) > 0 and not "libsodium" in deps.keys():
+        return
+
     print("Installing libSodium...")
 
     cwd = os.getcwd()
@@ -310,7 +366,10 @@ def installlibSodium(path):
     print("Installed libSodium.")
 
 
-def installsqlite3(path):
+def installsqlite3(path, deps):
+    if len(deps) > 0 and not "sqlite3" in deps.keys():
+        return
+
     print("Installing sqlite3...")
 
     cwd = os.getcwd()
@@ -332,7 +391,10 @@ def installsqlite3(path):
     print("Installed sqlite3.")
 
 
-def installGLEW(path):
+def installGLEW(path, deps):
+    if len(deps) > 0 and not "glew" in deps.keys():
+        return
+
     print("Installing GLEW...")
 
     cwd = os.getcwd()
@@ -354,7 +416,10 @@ def installGLEW(path):
     print("Installed GLEW.")
 
 
-def installNinja(path):
+def installNinja(path, deps):
+    if len(deps) > 0 and not "ninja" in deps.keys():
+        return
+
     print("Installing Ninja...")
 
     cwd = os.getcwd()
@@ -380,32 +445,34 @@ print("Installing all dependencies...")
 
 args = configureArguments()
 
+deps = getProjectDependencies(args.path)
+
 installPath = os.path.join(args.path, "libraries")
 
-installClang(installPath)
+installClang(installPath, deps)
 
-installv8(installPath)
+installv8(installPath, deps)
 
-installSDL(installPath)
+installSDL(installPath, deps)
 
-installSDLimage(installPath)
+installSDLimage(installPath, deps)
 
-installSDLnet(installPath)
+installSDLnet(installPath, deps)
 
-installSDLttf(installPath)
+installSDLttf(installPath, deps)
 
-installSDLmixer(installPath)
+installSDLmixer(installPath, deps)
 
-installCatch2(installPath)
+installCatch2(installPath, deps)
 
-installNlohmannJson(installPath)
+installNlohmannJson(installPath, deps)
 
-installlibSodium(installPath)
+installlibSodium(installPath, deps)
 
-installsqlite3(installPath)
+installsqlite3(installPath, deps)
 
-installGLEW(installPath)
+installGLEW(installPath, deps)
 
-installNinja(installPath)
+installNinja(installPath, deps)
 
 print("Installed all dependencies.")
