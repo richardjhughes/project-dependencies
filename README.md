@@ -105,7 +105,7 @@ python3 install.py -p /path/to/install/directory/ -iossim
 
 ##### Correct as of 2021-05-11
 
-Using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
+By default, using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
 
 To build, you need to install:
 
@@ -116,8 +116,10 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 
@@ -132,8 +134,10 @@ Note: this only works when building on MacOS.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
