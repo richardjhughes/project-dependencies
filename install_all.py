@@ -374,6 +374,10 @@ def installlibSodium(path, deps):
 
     print("Installing libSodium...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['libsodium']}"]
+
     cwd = os.getcwd()
     os.chdir("libsodium")
 
@@ -381,20 +385,20 @@ def installlibSodium(path, deps):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     # libSodium does not have a separate ios simulator build
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
     os.chdir(cwd)

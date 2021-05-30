@@ -8,11 +8,6 @@ import zipfile
 version = "1.0.18"
 gitUrl = "https://github.com/jedisct1/libsodium.git"
 
-sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Windows.zip"
-sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Darwin.zip"
-sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_iOS.zip"
-sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_1.0.18/1.0.18_Linux.zip"
-
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
 shPath = shutil.which("sh")
@@ -20,6 +15,7 @@ makePath = shutil.which("make")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--ios", action="store_true", required=False, help="Build iOS and iOS Simulator universal binaries. Note: Only valid for use when building on MacOS")
     args = parser.parse_args()
 
@@ -205,6 +201,11 @@ def tryAndDownloadBinaries(buildiOS):
 def downloadBinaries(buildiOS):
     print("Trying to download pre-built binaries...")
 
+    sdlDownloadURLWindows = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_{version}/{version}_Windows.zip"
+    sdlDownloadURLDarwin = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_{version}/{version}_Darwin.zip"
+    sdlDownloadURLiOS = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_{version}/{version}_iOS.zip"
+    sdlDownloadURLLinux = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/libSodium_{version}/{version}_Linux.zip"
+
     url = ""
 
     systemName = platform.system()
@@ -252,6 +253,9 @@ def downloadBinary(url, outputPath):
 print(f"Building libSoduim version {version}...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")

@@ -398,9 +398,9 @@ python3 install.py -p /path/to/install/directory -v version
 
 ## libSodium
 
-##### Correct as of 2021-05-14
+##### Correct as of 2021-05-30
 
-Using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
+By default, using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
 
 To build, you need to install:
 
@@ -420,8 +420,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -438,8 +440,10 @@ Note: This will build a universal iOS binary, which includes the iOS Simulator.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS build, pass the `-ios` flag:
 
