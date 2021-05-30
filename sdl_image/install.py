@@ -9,6 +9,7 @@ sdlImageVersion = "2.0.5"
 def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", action="store", required=True, help="path to install in")
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--ios", action="store_true", default=False, help="Install for iOS. Note: Only valid for use when building on MacOS")
     parser.add_argument("-iossim", "--ios-simulator", action="store_true", default=False, help="Install for iOS simulator. Note: Only valid for use when building on MacOS")
     args = parser.parse_args()
@@ -106,6 +107,9 @@ def install(path, buildForiOS, buildForiOSSimulator):
 print("Installing SDL image...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    sdlVersion = args.version
 
 if isSDLAlreadyInstalled(args.path, args.ios, args.ios_simulator):
     print("SDL image already installed.")

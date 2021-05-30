@@ -1,4 +1,5 @@
 import os
+import json
 import shutil
 import platform
 import argparse
@@ -19,19 +20,58 @@ def runCmd(cmd, cwd=None):
     subprocess.run(cmd, cwd=cwd)
 
 
-def installClang(path):
+def getProjectDependencies(path):
+    print("Checking for project dependencies...")
+
+    fileName = "libraries.json"
+    filePath = os.path.join(path, fileName)
+
+    if not os.path.exists(filePath) or not os.path.isfile(filePath):
+        print(f"Failed to find `{fileName}`.")
+        return {}
+
+    dependencies = {}
+
+    dependenciesFile = open(filePath)
+    dependenciesJson = json.load(dependenciesFile)
+
+    for d in dependenciesJson["dependencies"]:
+        dependencies[d["name"]] = d["version"]
+
+    dependenciesFile.close()
+
+    print("Checked.")
+
+    return dependencies
+
+
+def installClang(path, deps):
+    if len(deps) > 0 and not "clang" in deps.keys():
+        return
+
     print("Installing clang...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['clang']}"]
 
     installPath = os.path.join(os.getcwd(), "clang", "install.py")
 
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", path]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", path] + version
     runCmd(cmd)
 
     print("Installed clang.")
 
 
-def installv8(path):
+def installv8(path, deps):
+    if len(deps) > 0 and not "v8" in deps.keys():
+        return
+
     print("Installing v8...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['v8']}"]
 
     cwd = os.getcwd()
     os.chdir("v8")
@@ -39,25 +79,25 @@ def installv8(path):
     buildPath = os.path.join(os.getcwd(), "build.py")
     installPath = os.path.join(os.getcwd(), "install.py")
 
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", path]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", path] + version
     runCmd(cmd)
 
     if platform.system() == "Darwin":
         # iOS
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"] + version
         runCmd(cmd)
 
         # iOS Simulator
-        cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -65,8 +105,15 @@ def installv8(path):
     print("Installed v8.")
 
 
-def installSDL(path):
+def installSDL(path, deps):
+    if len(deps) > 0 and not "sdl" in deps.keys():
+        return
+
     print("Installing SDL...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl']}"]
 
     cwd = os.getcwd()
     os.chdir("sdl")
@@ -75,24 +122,24 @@ def installSDL(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -100,8 +147,15 @@ def installSDL(path):
     print("Installed SDL.")
 
 
-def installSDLimage(path):
+def installSDLimage(path, deps):
+    if len(deps) > 0 and not "sdl_image" in deps.keys():
+        return
+
     print("Installing SDL image...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl_image']}"]
 
     cwd = os.getcwd()
     os.chdir("sdl_image")
@@ -110,24 +164,24 @@ def installSDLimage(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -135,8 +189,15 @@ def installSDLimage(path):
     print("Installed SDL image.")
 
 
-def installSDLnet(path):
+def installSDLnet(path, deps):
+    if len(deps) > 0 and not "sdl_net" in deps.keys():
+        return
+
     print("Installing SDL net...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl_net']}"]
 
     cwd = os.getcwd()
     os.chdir("sdl_net")
@@ -145,24 +206,24 @@ def installSDLnet(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -170,8 +231,15 @@ def installSDLnet(path):
     print("Installed SDL net.")
 
 
-def installSDLttf(path):
+def installSDLttf(path, deps):
+    if len(deps) > 0 and not "sdl_ttf" in deps.keys():
+        return
+
     print("Installing SDL ttf...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl_ttf']}"]
 
     cwd = os.getcwd()
     os.chdir("sdl_ttf")
@@ -180,24 +248,24 @@ def installSDLttf(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -205,8 +273,15 @@ def installSDLttf(path):
     print("Installed SDL ttf.")
 
 
-def installSDLmixer(path):
+def installSDLmixer(path, deps):
+    if len(deps) > 0 and not "sdl_mixer" in deps.keys():
+        return
+
     print("Installing SDL mixer...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl_mixer']}"]
 
     cwd = os.getcwd()
     os.chdir("sdl_mixer")
@@ -215,24 +290,24 @@ def installSDLmixer(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -240,8 +315,15 @@ def installSDLmixer(path):
     print("Installed SDL mixer.")
 
 
-def installCatch2(path):
+def installCatch2(path, deps):
+    if len(deps) > 0 and not "catch2" in deps.keys():
+        return
+
     print("Installing catch2...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['catch2']}"]
 
     cwd = os.getcwd()
     os.chdir("catch2")
@@ -250,11 +332,11 @@ def installCatch2(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -262,8 +344,15 @@ def installCatch2(path):
     print("Installed catch2.")
 
 
-def installNlohmannJson(path):
+def installNlohmannJson(path, deps):
+    if len(deps) > 0 and not "nlohmann_json" in deps.keys():
+        return
+
     print("Installing nlohmann json...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['nlohmann_json']}"]
 
     cwd = os.getcwd()
     os.chdir("nlohmann_json")
@@ -271,7 +360,7 @@ def installNlohmannJson(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -279,8 +368,15 @@ def installNlohmannJson(path):
     print("Installed nlohmann json.")
 
 
-def installlibSodium(path):
+def installlibSodium(path, deps):
+    if len(deps) > 0 and not "libsodium" in deps.keys():
+        return
+
     print("Installing libSodium...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['libsodium']}"]
 
     cwd = os.getcwd()
     os.chdir("libsodium")
@@ -289,20 +385,20 @@ def installlibSodium(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     # libSodium does not have a separate ios simulator build
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
@@ -310,8 +406,15 @@ def installlibSodium(path):
     print("Installed libSodium.")
 
 
-def installsqlite3(path):
+def installsqlite3(path, deps):
+    if len(deps) > 0 and not "sqlite3" in deps.keys():
+        return
+
     print("Installing sqlite3...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sqlite3']}"]
 
     cwd = os.getcwd()
     os.chdir("sqlite3")
@@ -320,11 +423,11 @@ def installsqlite3(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -332,8 +435,15 @@ def installsqlite3(path):
     print("Installed sqlite3.")
 
 
-def installGLEW(path):
+def installGLEW(path, deps):
+    if len(deps) > 0 and not "glew" in deps.keys():
+        return
+
     print("Installing GLEW...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['glew']}"]
 
     cwd = os.getcwd()
     os.chdir("glew")
@@ -342,11 +452,11 @@ def installGLEW(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -354,8 +464,15 @@ def installGLEW(path):
     print("Installed GLEW.")
 
 
-def installNinja(path):
+def installNinja(path, deps):
+    if len(deps) > 0 and not "ninja" in deps.keys():
+        return
+
     print("Installing Ninja...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['ninja']}"]
 
     cwd = os.getcwd()
     os.chdir("ninja")
@@ -364,11 +481,11 @@ def installNinja(path):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -380,32 +497,34 @@ print("Installing all dependencies...")
 
 args = configureArguments()
 
+deps = getProjectDependencies(args.path)
+
 installPath = os.path.join(args.path, "libraries")
 
-installClang(installPath)
+installClang(installPath, deps)
 
-installv8(installPath)
+installv8(installPath, deps)
 
-installSDL(installPath)
+installSDL(installPath, deps)
 
-installSDLimage(installPath)
+installSDLimage(installPath, deps)
 
-installSDLnet(installPath)
+installSDLnet(installPath, deps)
 
-installSDLttf(installPath)
+installSDLttf(installPath, deps)
 
-installSDLmixer(installPath)
+installSDLmixer(installPath, deps)
 
-installCatch2(installPath)
+installCatch2(installPath, deps)
 
-installNlohmannJson(installPath)
+installNlohmannJson(installPath, deps)
 
-installlibSodium(installPath)
+installlibSodium(installPath, deps)
 
-installsqlite3(installPath)
+installsqlite3(installPath, deps)
 
-installGLEW(installPath)
+installGLEW(installPath, deps)
 
-installNinja(installPath)
+installNinja(installPath, deps)
 
 print("Installed all dependencies.")

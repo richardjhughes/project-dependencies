@@ -8,18 +8,13 @@ import zipfile
 sdlVersion = "2.0.14"
 sdlGitURL = "https://github.com/libsdl-org/SDL.git"
 
-sdlDownloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Windows.zip"
-sdlDownloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Darwin.zip"
-sdlDownloadURLiOS = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS.zip"
-sdlDownloadURLiOSSimulator = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_iOS_Simulator.zip"
-sdlDownloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_2.0.14/2.0.14_Linux.zip"
-
 gitPath = shutil.which("git")
 cmakePath = shutil.which("cmake")
 curlPath = shutil.which("curl")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--build-ios", action="store_true", required=False, help="build iOS binaries")
     args = parser.parse_args()
 
@@ -224,6 +219,12 @@ def tryAndDownloadBinaries(buildiOS):
 def downloadBinaries(buildiOS, buildiOSSimulator):
     print("Trying to download pre-built binaries...")
 
+    sdlDownloadURLWindows = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_{sdlVersion}/{sdlVersion}_Windows.zip"
+    sdlDownloadURLDarwin = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_{sdlVersion}/{sdlVersion}_Darwin.zip"
+    sdlDownloadURLiOS = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_{sdlVersion}/{sdlVersion}_iOS.zip"
+    sdlDownloadURLiOSSimulator = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_{sdlVersion}/{sdlVersion}_iOS_Simulator.zip"
+    sdlDownloadURLLinux = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SDL_{sdlVersion}/{sdlVersion}_Linux.zip"
+
     url = ""
 
     system_name = platform.system()
@@ -273,6 +274,9 @@ def downloadBinary(url, output_path):
 print(f"Building SDL version {sdlVersion}...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    sdlVersion = args.version
 
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")

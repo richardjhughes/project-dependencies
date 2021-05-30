@@ -9,6 +9,7 @@ sdlVersion = "1.0.18"
 def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", action="store", required=True, help="path to install in")
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--ios", action="store_true", required=False, help="Install iOS and iOS Simulator universal binaries. Note: Only valid for use when building on MacOS")
     args = parser.parse_args()
 
@@ -107,6 +108,9 @@ def install(path, buildForiOS):
 print("Installing libSodium...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 if isSDLAlreadyInstalled(args.path, args.ios):
     print("libSodium already installed.")

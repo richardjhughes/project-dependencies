@@ -8,14 +8,13 @@ import zipfile
 version = "2.13.6"
 gitUrl = "https://github.com/catchorg/Catch2.git"
 
-downloadURL = "https://github.com/snowmeltarcade/project-dependencies/releases/download/catch2_2.13.6/2.13.6.zip"
-
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
 cmakePath = shutil.which("cmake")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     args = parser.parse_args()
 
     return args
@@ -150,6 +149,8 @@ def doesNeedBuilding():
 def downloadBinaries():
     print("Trying to download pre-built binaries...")
 
+    downloadURL = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/catch2_{version}/{version}.zip"
+
     url = downloadURL
 
     if url == "":
@@ -181,6 +182,9 @@ def downloadBinary(url, outputPath):
 print(f"Building catch2 version {version}...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")

@@ -11,15 +11,12 @@ version = "2.2.0"
 # generated source
 gitUrl = "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip"
 
-downloadURLWindows = "https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_2.2.0/2.2.0_Windows.zip"
-downloadURLDarwin = "https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_2.2.0/2.2.0_Darwin.zip"
-downloadURLLinux = "https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_2.2.0/2.2.0_Linux.zip"
-
 curlPath = shutil.which("curl")
 cmakePath = shutil.which("cmake")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     args = parser.parse_args()
 
     return args
@@ -165,6 +162,10 @@ def doesNeedBuilding():
 def downloadBinaries():
     print("Trying to download pre-built binaries...")
 
+    downloadURLWindows = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_{version}/{version}_Windows.zip"
+    downloadURLDarwin = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_{version}/{version}_Darwin.zip"
+    downloadURLLinux = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/glew_{version}/{version}_Linux.zip"
+
     url = ""
 
     systemName = platform.system()
@@ -209,6 +210,9 @@ def downloadBinary(url, outputPath):
 print(f"Building glew version {version}...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")

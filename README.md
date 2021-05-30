@@ -19,23 +19,25 @@ python3 install_all.py -p /path/to/project/
 
 ## Clang
 
-##### Correct as of: 2021-05-04
+##### Correct as of: 2021-05-30
 
-Using version 12: https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0
+By default, using version 12: https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory/
+python3 install.py -p /path/to/install/directory/ -v version
 ```
+
+`-v` is optional.
 
 If using Linux, please note the Ubuntu 20.04 build of clang is downloaded.
 
 ## v8
 
-##### Correct as of: 2021-05-02
+##### Correct as of: 2021-05-30
 
-Using version 9.0: https://v8.dev/blog/v8-release-90
+By default, using version 9.0: https://v8.dev/blog/v8-release-90
 
 To build, you need to install:
 
@@ -48,8 +50,10 @@ If building on Ubuntu, you need to set `python2` as the default python installat
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 
@@ -76,8 +80,10 @@ https://v8.dev/docs/source-code
 Once built, you can install by running `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory/
+python3 install.py -p /path/to/install/directory/ -v version
 ```
+
+`-v` is optional.
 
 This will install the v8 binaries based on the platform the script is running.
 
@@ -97,9 +103,9 @@ python3 install.py -p /path/to/install/directory/ -iossim
 
 ## SDL
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
+By default, using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
 
 To build, you need to install:
 
@@ -110,8 +116,10 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 
@@ -126,8 +134,10 @@ Note: this only works when building on MacOS.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
@@ -138,9 +148,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Image
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
+By default, using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
 
 To build, you need to install:
 
@@ -156,8 +166,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -174,8 +186,10 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
@@ -186,9 +200,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Net
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
+By default, using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
 
 To build, you need to install:
 
@@ -204,8 +218,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -222,8 +238,10 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
@@ -234,9 +252,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL TTF
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.15: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.0.15
+By default, using version 2.0.15: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.0.15
 
 To build, you need to install:
 
@@ -256,8 +274,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -274,8 +294,10 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
@@ -286,9 +308,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Mixer
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.4: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.0.4
+By default, using version 2.0.4: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.0.4
 
 To build, you need to install:
 
@@ -304,8 +326,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -322,8 +346,10 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
@@ -334,37 +360,47 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## Catch2
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-30
 
-Using version 2.13.6: https://github.com/catchorg/Catch2/releases/tag/v2.13.6
+By default, using version 2.13.6: https://github.com/catchorg/Catch2/releases/tag/v2.13.6
 
-This a source code only package, so no building required.
+To build, run `build.py`:
+
+```
+python3 build.py -v version
+```
+
+`-v` is optional.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## Nlohmann JSON
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-30
 
-Using version 3.9.1: https://github.com/nlohmann/json/releases/tag/v3.9.1
+By default, using version 3.9.1: https://github.com/nlohmann/json/releases/tag/v3.9.1
 
 This a source code only package, so no building required.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## libSodium
 
-##### Correct as of 2021-05-14
+##### Correct as of 2021-05-30
 
-Using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
+By default, using version 1.0.18: https://github.com/jedisct1/libsodium/releases/tag/1.0.18
 
 To build, you need to install:
 
@@ -384,8 +420,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -402,8 +440,10 @@ Note: This will build a universal iOS binary, which includes the iOS Simulator.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS build, pass the `-ios` flag:
 
@@ -413,9 +453,9 @@ python3 install.py -p /path/to/install/directory -ios
 
 ## sqlite3
 
-##### Correct as of 2021-05-12
+##### Correct as of 2021-05-30
 
-Using version 3.35.5: https://github.com/sqlite/sqlite/releases/tag/version-3.35.5
+By default, using version 3.35.5: https://github.com/sqlite/sqlite/releases/tag/version-3.35.5
 
 To build, you need to install:
 
@@ -425,22 +465,26 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac. Building on Windows is not supported.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## glew
 
-##### Correct as of 2021-05-17
+##### Correct as of 2021-05-30
 
-Using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
+By default, using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
 
 To build, you need to install:
 
@@ -450,8 +494,10 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux, Mac or Windows.
 
@@ -460,8 +506,38 @@ Note: There is no iOS build, as glew is not used on iOS.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
+
+## Ninja
+
+##### Correct as of 2021-05-30
+
+By default, using version 1.10.2: https://github.com/ninja-build/ninja/releases/tag/v1.10.2
+
+To build, you need to install:
+
+To build, run `build.py`:
+
+```
+python3 build.py -v version
+```
+
+`-v` is optional.
+
+This will build for the platform you are running this script on, be it Linux, Mac or Windows.
+
+Note: There is no iOS build, as ninja is not used on iOS.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory -v version
+```
+
+`-v` is optional.
 
 ## License
 
