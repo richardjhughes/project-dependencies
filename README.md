@@ -482,9 +482,9 @@ python3 install.py -p /path/to/install/directory -v version
 
 ## glew
 
-##### Correct as of 2021-05-17
+##### Correct as of 2021-05-30
 
-Using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
+By default, using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
 
 To build, you need to install:
 
@@ -494,8 +494,10 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux, Mac or Windows.
 
@@ -504,8 +506,10 @@ Note: There is no iOS build, as glew is not used on iOS.
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## License
 
