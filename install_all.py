@@ -412,6 +412,10 @@ def installsqlite3(path, deps):
 
     print("Installing sqlite3...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sqlite3']}"]
+
     cwd = os.getcwd()
     os.chdir("sqlite3")
 
@@ -419,11 +423,11 @@ def installsqlite3(path, deps):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)

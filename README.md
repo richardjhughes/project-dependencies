@@ -453,9 +453,9 @@ python3 install.py -p /path/to/install/directory -ios
 
 ## sqlite3
 
-##### Correct as of 2021-05-12
+##### Correct as of 2021-05-30
 
-Using version 3.35.5: https://github.com/sqlite/sqlite/releases/tag/version-3.35.5
+By default, using version 3.35.5: https://github.com/sqlite/sqlite/releases/tag/version-3.35.5
 
 To build, you need to install:
 
@@ -465,16 +465,20 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac. Building on Windows is not supported.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## glew
 
