@@ -360,17 +360,25 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## Catch2
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-30
 
-Using version 2.13.6: https://github.com/catchorg/Catch2/releases/tag/v2.13.6
+By default, using version 2.13.6: https://github.com/catchorg/Catch2/releases/tag/v2.13.6
 
-This a source code only package, so no building required.
+To build, run `build.py`:
+
+```
+python3 build.py -v version
+```
+
+`-v` is optional.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## Nlohmann JSON
 
