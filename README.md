@@ -200,9 +200,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Net
 
-##### Correct as of 2021-05-11
+##### Correct as of 2021-05-30
 
-Using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
+By default, using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
 
 To build, you need to install:
 
@@ -218,8 +218,10 @@ To build on Linux, you also need to install:
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Linux or Mac.
 
@@ -236,8 +238,10 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
