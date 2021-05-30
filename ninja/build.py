@@ -3,14 +3,8 @@ import shutil
 import platform
 import argparse
 import subprocess
-import zipfile
 
 version = "1.10.2"
-
-# we will just download the prebuilt releases from github
-downloadURLWindows = "https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-win.zip"
-downloadURLDarwin = "https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-mac.zip"
-downloadURLLinux = "https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip"
 
 gitPath = shutil.which("git")
 cmakePath = shutil.which("cmake")
@@ -18,6 +12,7 @@ curlPath = shutil.which("curl")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     args = parser.parse_args()
 
     return args
@@ -78,6 +73,11 @@ def doesNeedBuilding():
 def downloadBinaries():
     print("Trying to download pre-built binaries...")
 
+    # we will just download the prebuilt releases from github
+    downloadURLWindows = f"https://github.com/ninja-build/ninja/releases/download/v{version}/ninja-win.zip"
+    downloadURLDarwin = f"https://github.com/ninja-build/ninja/releases/download/v{version}/ninja-mac.zip"
+    downloadURLLinux = f"https://github.com/ninja-build/ninja/releases/download/v{version}/ninja-linux.zip"
+
     url = ""
 
     system_name = platform.system()
@@ -122,6 +122,9 @@ def downloadBinary(url, output_path):
 print(f"Building Ninja version {version}...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")

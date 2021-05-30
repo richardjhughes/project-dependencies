@@ -511,6 +511,34 @@ python3 install.py -p /path/to/install/directory -v version
 
 `-v` is optional.
 
+## Ninja
+
+##### Correct as of 2021-05-30
+
+By default, using version 1.10.2: https://github.com/ninja-build/ninja/releases/tag/v1.10.2
+
+To build, you need to install:
+
+To build, run `build.py`:
+
+```
+python3 build.py -v version
+```
+
+`-v` is optional.
+
+This will build for the platform you are running this script on, be it Linux, Mac or Windows.
+
+Note: There is no iOS build, as ninja is not used on iOS.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory -v version
+```
+
+`-v` is optional.
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)

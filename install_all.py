@@ -470,6 +470,10 @@ def installNinja(path, deps):
 
     print("Installing Ninja...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['ninja']}"]
+
     cwd = os.getcwd()
     os.chdir("ninja")
 
@@ -477,11 +481,11 @@ def installNinja(path, deps):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)

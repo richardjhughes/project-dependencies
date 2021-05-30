@@ -12,6 +12,7 @@ version = "1.10.2"
 def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", action="store", required=True, help="path to install in")
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     args = parser.parse_args()
 
     return args
@@ -101,6 +102,9 @@ def install(path):
 print("Installing Ninja...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    version = args.version
 
 if isAlreadyInstalled(args.path):
     print("Ninja already installed.")
