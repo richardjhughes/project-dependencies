@@ -9,12 +9,6 @@ cwd = os.getcwd()
 
 v8_version = "9.0"
 
-v8_windows_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Windows.zip"
-v8_darwin_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Darwin.zip"
-v8_darwin_ios_binary_url = "https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_9.0/v8_9.0_iOS.zip"
-v8_darwin_ios_simulator_binary_url = "https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_9.0/v8_9.0_iOS_Simulator.zip"
-v8_linux_binary_url = "https://github.com/richardjhughes/project-dependencies/releases/download/v8_9.0/v8_9.0_Linux.zip"
-
 v8_source_dir = os.path.join(cwd, "v8")
 depot_tools_dir = os.path.join(v8_source_dir, "depot_tools")
 
@@ -212,6 +206,12 @@ def does_need_building(build_for_ios, build_for_ios_simulator):
 def try_and_download_binaries(build_for_ios, build_for_ios_simulator):
     print("Trying to download pre-built binaries...")
 
+    v8_windows_binary_url = f"https://github.com/richardjhughes/project-dependencies/releases/download/v8_{v8_version}/v8_{v8_version}_Windows.zip"
+    v8_darwin_binary_url = f"https://github.com/richardjhughes/project-dependencies/releases/download/v8_{v8_version}/v8_{v8_version}_Darwin.zip"
+    v8_darwin_ios_binary_url = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_{v8_version}/v8_{v8_version}_iOS.zip"
+    v8_darwin_ios_simulator_binary_url = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/v8_{v8_version}/v8_{v8_version}_iOS_Simulator.zip"
+    v8_linux_binary_url = f"https://github.com/richardjhughes/project-dependencies/releases/download/v8_{v8_version}/v8_{v8_version}_Linux.zip"
+
     url = ""
 
     system_name = platform.system()
@@ -259,11 +259,15 @@ def download_binary(url, output_path):
 print(f"Start building v8 version {v8_version}...")
 
 parser = argparse.ArgumentParser(description="Build v8")
+parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
 parser.add_argument("-c", "--clean", action="store_true", default=False, help="Clean previous build files & folders")
 parser.add_argument("-ios", "--ios", action="store_true", default=False, help="Build for iOS. Note: Only valid for use when building on MacOS")
 parser.add_argument("-iossim", "--ios-simulator", action="store_true", default=False, help="Build for iOS. Note: Only valid for use when building on MacOS")
 
 args = parser.parse_args()
+
+if args.version is not None and len(args.version) > 0:
+    v8_version = args.version
 
 if does_need_building(args.ios, args.ios_simulator):
     if args.clean:

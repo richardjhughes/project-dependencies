@@ -35,9 +35,9 @@ If using Linux, please note the Ubuntu 20.04 build of clang is downloaded.
 
 ## v8
 
-##### Correct as of: 2021-05-02
+##### Correct as of: 2021-05-30
 
-Using version 9.0: https://v8.dev/blog/v8-release-90
+By default, using version 9.0: https://v8.dev/blog/v8-release-90
 
 To build, you need to install:
 
@@ -50,8 +50,10 @@ If building on Ubuntu, you need to set `python2` as the default python installat
 To build, run `build.py`:
 
 ```
-python3 build.py
+python3 build.py -v version
 ```
+
+`-v` is optional.
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 
@@ -78,8 +80,10 @@ https://v8.dev/docs/source-code
 Once built, you can install by running `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory/
+python3 install.py -p /path/to/install/directory/ -v version
 ```
+
+`-v` is optional.
 
 This will install the v8 binaries based on the platform the script is running.
 

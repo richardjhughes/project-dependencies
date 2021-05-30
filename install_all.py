@@ -69,31 +69,35 @@ def installv8(path, deps):
 
     print("Installing v8...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['v8']}"]
+
     cwd = os.getcwd()
     os.chdir("v8")
 
     buildPath = os.path.join(os.getcwd(), "build.py")
     installPath = os.path.join(os.getcwd(), "install.py")
 
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", path]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", path] + version
     runCmd(cmd)
 
     if platform.system() == "Darwin":
         # iOS
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-ios"] + version
         runCmd(cmd)
 
         # iOS Simulator
-        cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-iossim"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", path, "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)

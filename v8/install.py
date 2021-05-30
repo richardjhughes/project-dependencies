@@ -9,6 +9,7 @@ v8Version = "9.0"
 def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", action="store", required=True, help="path to install in")
+    parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--ios", action="store_true", default=False, help="Install for iOS. Note: Only valid for use when building on MacOS")
     parser.add_argument("-iossim", "--ios-simulator", action="store_true", default=False, help="Install for iOS simulator. Note: Only valid for use when building on MacOS")
     args = parser.parse_args()
@@ -97,6 +98,9 @@ def install(path, buildForiOS, buildForiOSSimulator):
 print("Installing v8...")
 
 args = configureArguments()
+
+if args.version is not None and len(args.version) > 0:
+    v8Version = args.version
 
 if isv8AlreadyInstalled(args.path, args.ios, args.ios_simulator):
     print("v8 already installed.")
