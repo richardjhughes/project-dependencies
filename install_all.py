@@ -350,13 +350,17 @@ def installNlohmannJson(path, deps):
 
     print("Installing nlohmann json...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['nlohmann_json']}"]
+
     cwd = os.getcwd()
     os.chdir("nlohmann_json")
 
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # install
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     os.chdir(cwd)

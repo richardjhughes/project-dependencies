@@ -382,17 +382,19 @@ python3 install.py -p /path/to/install/directory -v version
 
 ## Nlohmann JSON
 
-##### Correct as of 2021-05-09
+##### Correct as of 2021-05-30
 
-Using version 3.9.1: https://github.com/nlohmann/json/releases/tag/v3.9.1
+By default, using version 3.9.1: https://github.com/nlohmann/json/releases/tag/v3.9.1
 
 This a source code only package, so no building required.
 
 To install, run `install.py`:
 
 ```
-python3 install.py -p /path/to/install/directory
+python3 install.py -p /path/to/install/directory -v version
 ```
+
+`-v` is optional.
 
 ## libSodium
 
