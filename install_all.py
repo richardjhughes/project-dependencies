@@ -279,6 +279,10 @@ def installSDLmixer(path, deps):
 
     print("Installing SDL mixer...")
 
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sdl_mixer']}"]
+
     cwd = os.getcwd()
     os.chdir("sdl_mixer")
 
@@ -286,24 +290,24 @@ def installSDLmixer(path, deps):
     installPath = os.path.join(os.getcwd(), "install.py")
 
     # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"]
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
     # build ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"]
+        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
         runCmd(cmd)
 
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"]
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
     # install ios
     if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
         runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"]
+        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
         runCmd(cmd)
 
     os.chdir(cwd)
