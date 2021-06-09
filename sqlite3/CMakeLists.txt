@@ -24,6 +24,14 @@ target_compile_options(
         "-Wno-language-extension-token"
         "-Wno-deprecated-declarations"
         "-Wno-unused-variable"
+        "-Wno-conversion"
+)
+
+# mute some warnings when building for iOS
+target_compile_definitions(
+    "${PROJECT_NAME}"
+    PUBLIC INTERFACE
+        -DHAVE_GETHOSTUUID=0
 )
 
 target_include_directories(
