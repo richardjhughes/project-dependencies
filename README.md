@@ -1,6 +1,21 @@
 # project-dependencies
 Common dependencies used by projects
 
+ * [Clang](#clang)
+ * [v8](#v8)
+ * [SDL](#sdl)
+ * [SDL Image](#sdl-image)
+ * [SDL Net](#sdl-net)
+ * [SDL TTF](#sdl-ttf)
+ * [SDL Mixer](#sdl-mixer)
+ * [Catch2](#catch2)
+ * [Nlohmann JSON](#nlohmann-json)
+ * [libSodium](#libsodium)
+ * [SQLite3](#sqlite3)
+ * [GLEW](#glew)
+ * [Ninja](#ninja)
+ * [GLM](#glm)
+
 ## Usage
 
 ##### Correct as of: 2021-05-01
@@ -453,7 +468,7 @@ If running on MacOS, to install the iOS build, pass the `-ios` flag:
 python3 install.py -p /path/to/install/directory -ios
 ```
 
-## sqlite3
+## SQLite3
 
 ##### Correct as of 2021-05-30
 
@@ -482,7 +497,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 `-v` is optional.
 
-## glew
+## GLEW
 
 ##### Correct as of 2021-05-30
 
