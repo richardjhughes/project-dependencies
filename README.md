@@ -541,6 +541,22 @@ python3 install.py -p /path/to/install/directory -v version
 
 `-v` is optional.
 
+## GLM
+
+##### Correct as of 2021-05-30
+
+By default, using version 0.9.9.8: https://github.com/g-truc/glm/releases/tag/0.9.9.8
+
+This a source code only package, so no building required.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory -v version
+```
+
+`-v` is optional.
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/snowmeltarcade/project-dependencies?style=plastic)

@@ -493,6 +493,30 @@ def installNinja(path, deps):
     print("Installed Ninja.")
 
 
+def installGLM(path, deps):
+    if len(deps) > 0 and not "glm" in deps.keys():
+        return
+
+    print("Installing glm...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['glm']}"]
+
+    cwd = os.getcwd()
+    os.chdir("glm")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed glm.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -526,5 +550,7 @@ installsqlite3(installPath, deps)
 installGLEW(installPath, deps)
 
 installNinja(installPath, deps)
+
+installGLM(installPath, deps)
 
 print("Installed all dependencies.")
