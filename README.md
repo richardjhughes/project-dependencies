@@ -15,6 +15,7 @@ Common dependencies used by projects
  * [GLEW](#glew)
  * [Ninja](#ninja)
  * [GLM](#glm)
+ * [SAIL](#sail)
 
 ## Usage
 
@@ -563,6 +564,37 @@ python3 install.py -p /path/to/install/directory -v version
 By default, using version 0.9.9.8: https://github.com/g-truc/glm/releases/tag/0.9.9.8
 
 This a source code only package, so no building required.
+
+To install, run `install.py`:
+
+```
+python3 install.py -p /path/to/install/directory -v version
+```
+
+`-v` is optional.
+
+## SAIL
+
+##### Correct as of 2021-09-12
+
+By default, using version v0.9.0-pre16: https://github.com/HappySeaFox/sail/releases/tag/v0.9.0-pre16
+
+To build, you need to install:
+
+* Git
+* CMake
+* Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
+    * Node: AppleClang will not build, you need to install clang via home brew (`brew install --with-toolchain llvm`)
+
+To build, run `build.py`:
+
+```
+python3 build.py -v version
+```
+
+`-v` is optional.
+
+This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 
 To install, run `install.py`:
 
