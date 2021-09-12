@@ -517,6 +517,35 @@ def installGLM(path, deps):
     print("Installed glm.")
 
 
+def installSAIL(path, deps):
+    if len(deps) > 0 and not "sail" in deps.keys():
+        return
+
+    print("Installing SAIL...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['sail']}"]
+
+    cwd = os.getcwd()
+    os.chdir("sail")
+
+    buildPath = os.path.join(os.getcwd(), "build.py")
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # build standard
+    cmd = [f"{pythonPath}", f"{buildPath}"] + version
+    runCmd(cmd)
+
+    # install standard
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed SAIL.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -552,5 +581,7 @@ installGLEW(installPath, deps)
 installNinja(installPath, deps)
 
 installGLM(installPath, deps)
+
+installSAIL(installPath, deps)
 
 print("Installed all dependencies.")

@@ -3,7 +3,6 @@ import shutil
 import platform
 import argparse
 import subprocess
-import zipfile
 
 version = "v0.9.0-pre16"
 gitURL = "https://github.com/HappySeaFox/sail.git"
@@ -138,19 +137,19 @@ def doesNeedBuilding():
 def tryAndDownloadBinaries():
     print("Trying to download pre-built binaries...")
 
-    sdlDownloadURLWindows = f""
-    sdlDownloadURLDarwin = f""
-    sdlDownloadURLLinux = f""
+    downloadURLWindows = f""
+    downloadURLDarwin = f""
+    downloadURLLinux = f""
 
     url = ""
 
     system_name = platform.system()
     if system_name == "Windows":
-        url = sdlDownloadURLWindows
+        url = downloadURLWindows
     elif system_name == "Darwin":
-        url = sdlDownloadURLDarwin
+        url = downloadURLDarwin
     elif system_name == "Linux":
-        url = sdlDownloadURLLinux
+        url = downloadURLLinux
     else:
         print(f"Unknown system name: {system_name}")
         return False
