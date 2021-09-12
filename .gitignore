@@ -26,3 +26,5 @@ glew/lib/
 glew/__temp/
 ninja/lib/
 ninja/__temp/
+sail/lib/
+sail/__temp/
