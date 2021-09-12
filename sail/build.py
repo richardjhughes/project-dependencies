@@ -138,7 +138,7 @@ def tryAndDownloadBinaries():
     print("Trying to download pre-built binaries...")
 
     downloadURLWindows = f""
-    downloadURLDarwin = f""
+    downloadURLDarwin = f"https://github.com/snowmeltarcade/project-dependencies/releases/download/SAIL_v0.9.0-pre16/v0.9.0-pre16_Darwin.zip"
     downloadURLLinux = f""
 
     url = ""
@@ -158,7 +158,7 @@ def tryAndDownloadBinaries():
         return False
 
     destLibDir = os.path.join(os.getcwd(), "lib", platform.system())
-    zipDir = getZipPath(destLibDir, platform.system())
+    zipDir = getZipPath(destLibDir) + ".zip"
 
     result = downloadBinary(url, zipDir)
 
