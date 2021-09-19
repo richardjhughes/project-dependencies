@@ -523,22 +523,13 @@ def installSAIL(path, deps):
 
     print("Installing SAIL...")
 
-    version = []
-    if len(deps) > 0:
-        version = ["-v", f"{deps['sail']}"]
-
     cwd = os.getcwd()
     os.chdir("sail")
 
-    buildPath = os.path.join(os.getcwd(), "build.py")
     installPath = os.path.join(os.getcwd(), "install.py")
 
-    # build standard
-    cmd = [f"{pythonPath}", f"{buildPath}"] + version
-    runCmd(cmd)
-
     # install standard
-    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    cmd = [f"{pythonPath}", f"{installPath}"]
     runCmd(cmd)
 
     os.chdir(cwd)
