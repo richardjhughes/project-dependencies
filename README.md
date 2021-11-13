@@ -16,6 +16,7 @@ Common dependencies used by projects
  * [Ninja](#ninja)
  * [GLM](#glm)
  * [SAIL](#sail)
+ * [doxygen](#doxygen)
 
 ## Usage
 
@@ -578,6 +579,18 @@ python3 install.py -p /path/to/install/directory -v version
 ##### Correct as of 2021-09-18
 
 SAIL has a spider web of dependencies, so building locally, on all platforms, reproducibly and dependably is hard. To keep things simple, for now, we will install SAIL using a package manager, as described [here](https://github.com/HappySeaFox/sail#preferred-installation-method).
+
+To install, run `install.py`:
+
+```
+python3 install.py
+```
+
+## doxygen
+
+##### Correct as of 2021-11-13
+
+There is no need to build `doxygen` as no code will be integrated.
 
 To install, run `install.py`:
 

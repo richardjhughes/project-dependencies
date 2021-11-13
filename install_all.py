@@ -537,6 +537,26 @@ def installSAIL(path, deps):
     print("Installed SAIL.")
 
 
+def installDoxygen(path, deps):
+    if len(deps) > 0 and not "doxygen" in deps.keys():
+        return
+
+    print("Installing doxygen...")
+
+    cwd = os.getcwd()
+    os.chdir("doxygen")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install standard
+    cmd = [f"{pythonPath}", f"{installPath}"]
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed doxygen.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -574,5 +594,7 @@ installNinja(installPath, deps)
 installGLM(installPath, deps)
 
 installSAIL(installPath, deps)
+
+installDoxygen(installPath, deps)
 
 print("Installed all dependencies.")
