@@ -581,6 +581,30 @@ def installVulkan(path, deps):
     print("Installed vulkan.")
 
 
+def installVulkanMemoryAllocator(path, deps):
+    if len(deps) > 0 and not "vulkan_memory_allocator" in deps.keys():
+        return
+
+    print("Installing vulkan memory allocator...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['vulkan_memory_allocator']}"]
+
+    cwd = os.getcwd()
+    os.chdir("vulkan_memory_allocator")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed vulkan memory allocator.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -622,5 +646,7 @@ installSAIL(installPath, deps)
 installDoxygen(installPath, deps)
 
 installVulkan(installPath, deps)
+
+installVulkanMemoryAllocator(installPath, deps)
 
 print("Installed all dependencies.")

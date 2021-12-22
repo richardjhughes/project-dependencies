@@ -30,3 +30,5 @@ sail/lib/
 sail/__temp/
 vulkan/__temp/
 vulkan/vulkan/
+vulkan_memory_allocator/__temp/
+vulkan_memory_allocator/vulkan_memory_allocator/
