@@ -557,6 +557,30 @@ def installDoxygen(path, deps):
     print("Installed doxygen.")
 
 
+def installVulkan(path, deps):
+    if len(deps) > 0 and not "vulkan" in deps.keys():
+        return
+
+    print("Installing vulkan...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['vulkan']}"]
+
+    cwd = os.getcwd()
+    os.chdir("vulkan")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed vulkan.")
+
+
 print("Installing all dependencies...")
 
 args = configureArguments()
@@ -596,5 +620,7 @@ installGLM(installPath, deps)
 installSAIL(installPath, deps)
 
 installDoxygen(installPath, deps)
+
+installVulkan(installPath, deps)
 
 print("Installed all dependencies.")
