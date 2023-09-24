@@ -49,7 +49,7 @@ def install(path, version):
     osName = platform.system()
 
     if version is None or len(version) <= 0:
-        version = "12.0.0"
+        version = "16.0.5"
 
     if osName == "Windows":
         installForWindows(installDir, version)
@@ -121,7 +121,7 @@ def installForDarwin(installDir, version):
     filename = "clang.tar.xf"
 
     # download clang
-    cmd = ["curl", "-L", f"https://github.com/llvm/llvm-project/releases/download/llvmorg-{version}/clang+llvm-{version}-x86_64-apple-darwin.tar.xz", "-o", filename]
+    cmd = ["curl", "-L", f"https://github.com/llvm/llvm-project/releases/download/llvmorg-{version}/clang+llvm-{version}-arm64-apple-darwin22.0.tar.xz", "-o", filename]
     runCmd(cmd)
 
     # install
