@@ -4,7 +4,7 @@ import platform
 import argparse
 import zipfile
 
-sdlTTFVersion = "2.0.15"
+sdlTTFVersion = "2.20.2"
 
 def configureArguments():
     parser = argparse.ArgumentParser()

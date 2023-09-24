@@ -4,7 +4,7 @@ import platform
 import argparse
 import zipfile
 
-sdlMixerVersion = "2.0.4"
+sdlMixerVersion = "2.6.3"
 
 def configureArguments():
     parser = argparse.ArgumentParser()

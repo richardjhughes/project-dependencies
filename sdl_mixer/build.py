@@ -5,7 +5,7 @@ import argparse
 import subprocess
 import zipfile
 
-sdlVersion = "2.0.4"
+sdlVersion = "2.6.3"
 sdlGitURL = "https://github.com/libsdl-org/SDL_mixer.git"
 
 gitPath = shutil.which("git")

@@ -120,9 +120,9 @@ python3 install.py -p /path/to/install/directory/ -iossim
 
 ## SDL
 
-##### Correct as of 2021-06-12
+##### Correct as of 2023-09-24
 
-By default, using version 2.0.14: https://github.com/libsdl-org/SDL/releases/tag/release-2.0.14
+By default, using version 2.28.3: https://github.com/libsdl-org/SDL/releases/tag/release-2.28.3
 
 To build, you need to install:
 
@@ -167,9 +167,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Image
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 2.0.5: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.0.5
+By default, using version 2.6.3: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.6.3
 
 To build, you need to install:
 
@@ -219,9 +219,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Net
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 2.0.1: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.0.1
+By default, using version 2.2.0: https://github.com/libsdl-org/SDL_net/releases/tag/release-2.2.0
 
 To build, you need to install:
 
@@ -271,9 +271,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL TTF
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 2.0.15: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.0.15
+By default, using version 2.20.2: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.20.2
 
 To build, you need to install:
 
@@ -327,9 +327,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## SDL Mixer
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 2.0.4: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.0.4
+By default, using version 2.6.3: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.6.3
 
 To build, you need to install:
 

@@ -5,7 +5,7 @@ import argparse
 import subprocess
 import zipfile
 
-sdlVersion = "2.0.15"
+sdlVersion = "2.20.2"
 sdlGitURL = "https://github.com/libsdl-org/SDL_ttf.git"
 
 gitPath = shutil.which("git")

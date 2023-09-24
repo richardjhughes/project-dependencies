@@ -4,7 +4,7 @@ import platform
 import argparse
 import zipfile
 
-sdlImageVersion = "2.0.5"
+sdlImageVersion = "2.6.3"
 
 def configureArguments():
     parser = argparse.ArgumentParser()
