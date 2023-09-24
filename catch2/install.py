@@ -4,7 +4,7 @@ import platform
 import argparse
 import zipfile
 
-version = "2.13.6"
+version = "3.4.0"
 
 def configureArguments():
     parser = argparse.ArgumentParser()

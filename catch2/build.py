@@ -5,7 +5,7 @@ import argparse
 import subprocess
 import zipfile
 
-version = "2.13.6"
+version = "3.4.0"
 gitUrl = "https://github.com/catchorg/Catch2.git"
 
 gitPath = shutil.which("git")

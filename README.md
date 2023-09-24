@@ -389,9 +389,9 @@ python3 install.py -p /path/to/install/directory -iossim
 
 ## Catch2
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 2.13.6: https://github.com/catchorg/Catch2/releases/tag/v2.13.6
+By default, using version 3.4.0: https://github.com/catchorg/Catch2/releases/tag/v3.4.0
 
 To build, run `build.py`:
 
@@ -515,7 +515,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 ## GLEW
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
 By default, using version 2.2.0: https://github.com/nigels-com/glew/releases/tag/glew-2.2.0
 
