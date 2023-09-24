@@ -4,7 +4,7 @@ import platform
 import argparse
 import subprocess
 
-version = "1.10.2"
+version = "1.11.1"
 
 gitPath = shutil.which("git")
 cmakePath = shutil.which("cmake")

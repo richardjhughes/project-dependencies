@@ -546,9 +546,9 @@ python3 install.py -p /path/to/install/directory -v version
 
 ## Ninja
 
-##### Correct as of 2021-05-30
+##### Correct as of 2023-09-24
 
-By default, using version 1.10.2: https://github.com/ninja-build/ninja/releases/tag/v1.10.2
+By default, using version 1.11.1: https://github.com/ninja-build/ninja/releases/tag/v1.11.1
 
 To build, you need to install:
 
