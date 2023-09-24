@@ -1,22 +1,23 @@
-# project-dependencies
+# Project Dependencies
+
 Common dependencies used by projects
 
- * [Clang](#clang)
- * [v8](#v8)
- * [SDL](#sdl)
- * [SDL Image](#sdl-image)
- * [SDL Net](#sdl-net)
- * [SDL TTF](#sdl-ttf)
- * [SDL Mixer](#sdl-mixer)
- * [Catch2](#catch2)
- * [Nlohmann JSON](#nlohmann-json)
- * [libSodium](#libsodium)
- * [SQLite3](#sqlite3)
- * [GLEW](#glew)
- * [Ninja](#ninja)
- * [GLM](#glm)
- * [SAIL](#sail)
- * [doxygen](#doxygen)
+* [Clang](#clang)
+* [v8](#v8)
+* [SDL](#sdl)
+* [SDL Image](#sdl-image)
+* [SDL Net](#sdl-net)
+* [SDL TTF](#sdl-ttf)
+* [SDL Mixer](#sdl-mixer)
+* [Catch2](#catch2)
+* [Nlohmann JSON](#nlohmann-json)
+* [libSodium](#libsodium)
+* [SQLite3](#sqlite3)
+* [GLEW](#glew)
+* [Ninja](#ninja)
+* [GLM](#glm)
+* [SAIL](#sail)
+* [doxygen](#doxygen)
 
 ## Usage
 
@@ -30,7 +31,7 @@ Building specific dependencies may require other dependencies. These are listed 
 
 You can install everything by running `install_all.py`:
 
-```
+```shell
 python3 install_all.py -p /path/to/project/
 ```
 
@@ -42,7 +43,7 @@ By default, using version 12: https://github.com/llvm/llvm-project/releases/tag/
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory/ -v version
 ```
 
@@ -66,7 +67,7 @@ If building on Ubuntu, you need to set `python2` as the default python installat
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -78,13 +79,13 @@ To build for iOS or the iOS simulator, you must run this script on MacOS.
 
 For iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
 For the iOS simulator, pass the `-iossim` flag:
 
-```
+```shell
 python3 build.py -iossim
 ```
 
@@ -96,7 +97,7 @@ https://v8.dev/docs/source-code
 
 Once built, you can install by running `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory/ -v version
 ```
 
@@ -108,13 +109,13 @@ If you would like to install the iOS or iOS Simulator binaries, run `install.py`
 
 iOS:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory/ -ios
 ```
 
 iOS Simulator:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory/ -iossim
 ```
 
@@ -132,7 +133,7 @@ To build, you need to install:
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -142,7 +143,7 @@ This will build for the platform you are running this script on, be it Windows, 
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -152,7 +153,7 @@ Note note: For some reason, the resulting iOS & iOS Simulator `libSDL2.a` files 
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -160,7 +161,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 python3 install.py -p /path/to/install/directory -iossim
 ```
@@ -177,14 +178,16 @@ To build, you need to install:
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 To build on Linux, you also need to install:
+
 * Autoconf
-    ```
-    sudo apt-get install autoconf
-    ```
+
+```shell
+sudo apt-get install autoconf
+```
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -196,7 +199,7 @@ Note: v2.0.5 is very difficult to build automatically on Windows. For now, pleas
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -204,7 +207,7 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -212,7 +215,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 python3 install.py -p /path/to/install/directory -iossim
 ```
@@ -230,13 +233,14 @@ To build, you need to install:
 
 To build on Linux, you also need to install:
 * Autoconf
-    ```
-    sudo apt-get install autoconf
-    ```
+
+```shell
+sudo apt-get install autoconf
+```
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -248,7 +252,7 @@ Note: v2.0.1 is very difficult to build automatically on Windows. For now, pleas
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -256,7 +260,7 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -264,7 +268,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 python3 install.py -p /path/to/install/directory -iossim
 ```
@@ -281,18 +285,22 @@ To build, you need to install:
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 To build on Linux, you also need to install:
+
 * Autoconf
-    ```
-    sudo apt-get install autoconf
-    ```
+
+```shell
+sudo apt-get install autoconf
+```
+
 * Freetype 6 Dev
-    ```
-    sudo apt-get install libfreetype6-dev
-    ```
+
+```shell
+sudo apt-get install libfreetype6-dev
+```
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -304,7 +312,7 @@ Note: v2.0.15 is very difficult to build automatically on Windows. For now, plea
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -312,7 +320,7 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -320,7 +328,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 python3 install.py -p /path/to/install/directory -iossim
 ```
@@ -337,14 +345,16 @@ To build, you need to install:
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 To build on Linux, you also need to install:
+
 * Autoconf
-    ```
-    sudo apt-get install autoconf
-    ```
+
+```shell
+sudo apt-get install autoconf
+```
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -356,7 +366,7 @@ Note: v2.0.4 is very difficult to build automatically on Windows. For now, pleas
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -364,7 +374,7 @@ Note: this only works when building on MacOS. Please use Xcode to perform the ac
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -372,7 +382,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS or iOS Simulator builds, pass the `-ios` or `-iossim` flags:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 python3 install.py -p /path/to/install/directory -iossim
 ```
@@ -385,7 +395,7 @@ By default, using version 2.13.6: https://github.com/catchorg/Catch2/releases/ta
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -393,7 +403,7 @@ python3 build.py -v version
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -409,7 +419,7 @@ This a source code only package, so no building required.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -427,18 +437,22 @@ To build, you need to install:
 * Standard compiler setup for your platform (MSVC, Clang, GCC, Xcode etc...)
 
 To build on Linux, you also need to install:
+
 * Autoconf
-    ```
-    sudo apt-get install autoconf
-    ```
+
+```shell
+sudo apt-get install autoconf
+```
+
 * libtool
-    ```
-    sudo apt-get install libtool
-    ```
+
+```shell
+sudo apt-get install libtool
+```
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -450,7 +464,7 @@ Note: Please manually build on Windows using Visual Studio. See the MSVC package
 
 To build for iOS, pass the `-ios` flag:
 
-```
+```shell
 python3 build.py -ios
 ```
 
@@ -458,7 +472,7 @@ Note: This will build a universal iOS binary, which includes the iOS Simulator.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -466,7 +480,7 @@ python3 install.py -p /path/to/install/directory -v version
 
 If running on MacOS, to install the iOS build, pass the `-ios` flag:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -ios
 ```
 
@@ -483,7 +497,7 @@ To build, you need to install:
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -493,7 +507,7 @@ This will build for the platform you are running this script on, be it Linux or 
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -512,7 +526,7 @@ To build, you need to install:
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -524,7 +538,7 @@ Note: There is no iOS build, as glew is not used on iOS.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -540,7 +554,7 @@ To build, you need to install:
 
 To build, run `build.py`:
 
-```
+```shell
 python3 build.py -v version
 ```
 
@@ -552,7 +566,7 @@ Note: There is no iOS build, as ninja is not used on iOS.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -568,7 +582,7 @@ This a source code only package, so no building required.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py -p /path/to/install/directory -v version
 ```
 
@@ -582,7 +596,7 @@ SAIL has a spider web of dependencies, so building locally, on all platforms, re
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py
 ```
 
@@ -594,7 +608,7 @@ There is no need to build `doxygen` as no code will be integrated.
 
 To install, run `install.py`:
 
-```
+```shell
 python3 install.py
 ```
 
