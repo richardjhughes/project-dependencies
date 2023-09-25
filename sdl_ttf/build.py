@@ -10,8 +10,7 @@ sdlGitURL = "https://github.com/libsdl-org/SDL_ttf.git"
 
 gitPath = shutil.which("git")
 curlPath = shutil.which("curl")
-shPath = shutil.which("sh")
-makePath = shutil.which("make")
+cmakePath = shutil.which("cmake")
 
 def configureArguments():
     parser = argparse.ArgumentParser()
@@ -73,32 +72,29 @@ def build(buildiOS, tempDirPath):
     cmd = [gitPath, "clone", f"{sdlGitURL}"]
     runCmd(cmd)
 
-    os.chdir(os.path.join(os.getcwd(), "SDL_ttf"))
+    sdlPath = os.path.join(os.getcwd(), "SDL_ttf")
+    os.chdir(sdlPath)
 
     # checkout the version we want
     cmd = [gitPath, "checkout", f"tags/release-{sdlVersion}", "-b", f"release-{sdlVersion}"]
     runCmd(cmd)
 
-    if platform.system() == "Windows":
-        print("Please build manually using Visual Studio.")
-        return
-
     if buildiOS:
         print("Please build iOS and iOS Simulator manually from Xcode.")
         return
+
+    buildPath = os.path.join(sdlPath, "build")
+    createDirectories(buildPath) 
+    os.chdir(buildPath)
+
+    cmd = [cmakePath, "-DBUILD_SHARED_LIBS=off", ".."]
+    runCmd(cmd)
     
-    cmd = [shPath, "autogen.sh"]
+    cmd = [cmakePath, "--build", ".", "--config=Release"]
     runCmd(cmd)
 
     installPath = os.path.join(tempDirPath, "install")
-
-    cmd = [shPath, "./configure", f"--prefix={installPath}"]
-    runCmd(cmd)
-
-    cmd = [makePath]
-    runCmd(cmd)
-
-    cmd = [makePath, "install"]
+    cmd = [cmakePath, "--install", ".", f"--prefix={installPath}"]
     runCmd(cmd)
 
     os.chdir(cwd)
@@ -120,6 +116,7 @@ def saveResults(buildiOS, tempDirPath):
         sdlPath = os.path.join(tempDirPath, "install")
         buildDir = os.path.join(sdlPath, "lib")
         includePath = os.path.join(sdlPath, "include", "SDL2")
+        licensePath = os.path.join(sdlPath, "share", "licenses", "SDL2_ttf")
 
         if platform.system() == "Windows":
             print("Windows builds should be done manually from Visual Studio.")
@@ -129,14 +126,14 @@ def saveResults(buildiOS, tempDirPath):
 
         destLibDir = os.path.join(os.getcwd(), "lib", platformLibName)
 
-        saveBinaries(destLibDir, includePath, platformLibName, buildDir)
+        saveBinaries(destLibDir, includePath, platformLibName, buildDir, licensePath)
         
         print("Saved results for current platform...")
 
     print("Saved results.")
 
 
-def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
+def saveBinaries(destLibDir, includePath, platformLibName, buildDir, licensePath):
     createDirectories(destLibDir)
 
     zipDir = getZipPath(destLibDir, platformLibName)
@@ -150,6 +147,7 @@ def saveBinaries(destLibDir, includePath, platformLibName, buildDir):
             print("Please create Windows zip file manually from Visual Studio build output.")
         else:
             zip.write(os.path.join(buildDir, "libSDL2_ttf.a"), "libSDL2_ttf.a")
+            zip.write(os.path.join(licensePath, "LICENSE.txt"), "LICENSE.txt")
 
 
 def getPlatformLibName(buildiOS, buildiOSSimulator):

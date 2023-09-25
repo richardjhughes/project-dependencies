@@ -298,6 +298,14 @@ sudo apt-get install autoconf
 sudo apt-get install libfreetype6-dev
 ```
 
+To build on MacOS, you also need to install:
+
+* Freetype
+
+```shell
+brew install freetype
+```
+
 To build, run `build.py`:
 
 ```shell
