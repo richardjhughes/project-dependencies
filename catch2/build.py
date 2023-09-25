@@ -1,4 +1,5 @@
 import os
+import glob
 import shutil
 import platform
 import argparse
@@ -114,22 +115,26 @@ def saveBinaries(destLibDir, resultsPath):
     includePrefix = os.path.join("include", "catch2")
     includeDir = os.path.join(resultsPath, includePrefix)
 
-    libPrefix = os.path.join("lib", "cmake", "Catch2")
+    libPrefix = os.path.join("lib")
     libDir = os.path.join(resultsPath, libPrefix)
 
-    with zipfile.ZipFile(zipDir, "w") as zip:
-        zip.write(os.path.join(includeDir, "catch.hpp"), os.path.join(includePrefix, "catch.hpp"))
-        zip.write(os.path.join(includeDir, "catch_reporter_automake.hpp"), os.path.join(includePrefix, "catch_reporter_automake.hpp"))
-        zip.write(os.path.join(includeDir, "catch_reporter_sonarqube.hpp"), os.path.join(includePrefix, "catch_reporter_sonarqube.hpp"))
-        zip.write(os.path.join(includeDir, "catch_reporter_tap.hpp"), os.path.join(includePrefix, "catch_reporter_tap.hpp"))
-        zip.write(os.path.join(includeDir, "catch_reporter_teamcity.hpp"), os.path.join(includePrefix, "catch_reporter_teamcity.hpp"))
+    libCmakePrefix = os.path.join("lib", "cmake", "Catch2")
+    libCmakeDir = os.path.join(resultsPath, libCmakePrefix)
 
-        zip.write(os.path.join(libDir, "Catch.cmake"), os.path.join(libPrefix, "Catch.cmake"))
-        zip.write(os.path.join(libDir, "Catch2Config.cmake"), os.path.join(libPrefix, "Catch2Config.cmake"))
-        zip.write(os.path.join(libDir, "Catch2ConfigVersion.cmake"), os.path.join(libPrefix, "Catch2ConfigVersion.cmake"))
-        zip.write(os.path.join(libDir, "Catch2Targets.cmake"), os.path.join(libPrefix, "Catch2Targets.cmake"))
-        zip.write(os.path.join(libDir, "CatchAddTests.cmake"), os.path.join(libPrefix, "CatchAddTests.cmake"))
-        zip.write(os.path.join(libDir, "ParseAndAddCatchTests.cmake"), os.path.join(libPrefix, "ParseAndAddCatchTests.cmake"))
+    with zipfile.ZipFile(zipDir, "w") as zip:
+        for file in glob.glob(os.path.join(includeDir, "**/*"), recursive=True):
+            relativePath = file.replace(includeDir, "")
+            zip.write(file, os.path.join(includePrefix, relativePath))
+
+        zip.write(os.path.join(libCmakeDir, "Catch.cmake"), os.path.join(libCmakePrefix, "Catch.cmake"))
+        zip.write(os.path.join(libCmakeDir, "Catch2Config.cmake"), os.path.join(libCmakePrefix, "Catch2Config.cmake"))
+        zip.write(os.path.join(libCmakeDir, "Catch2ConfigVersion.cmake"), os.path.join(libCmakePrefix, "Catch2ConfigVersion.cmake"))
+        zip.write(os.path.join(libCmakeDir, "Catch2Targets.cmake"), os.path.join(libCmakePrefix, "Catch2Targets.cmake"))
+        zip.write(os.path.join(libCmakeDir, "CatchAddTests.cmake"), os.path.join(libCmakePrefix, "CatchAddTests.cmake"))
+        zip.write(os.path.join(libCmakeDir, "ParseAndAddCatchTests.cmake"), os.path.join(libCmakePrefix, "ParseAndAddCatchTests.cmake"))
+
+        zip.write(os.path.join(libDir, "libCatch2.a"), os.path.join(libPrefix, "libCatch2.a"))
+        zip.write(os.path.join(libDir, "libCatch2Main.a"), os.path.join(libPrefix, "libCatch2Main.2"))
 
 
 def getZipPath(destLibDir):
