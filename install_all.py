@@ -125,22 +125,22 @@ def installSDL(path, deps):
     cmd = [f"{pythonPath}", f"{buildPath}"] + version
     runCmd(cmd)
 
-    # build ios
-    if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
-        runCmd(cmd)
+    # # build ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{buildPath}", "-ios"] + version
+    #     runCmd(cmd)
 
     # install standard
     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
     runCmd(cmd)
 
-    # install ios
-    if platform.system() == "Darwin":
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
-        runCmd(cmd)
+    # # install ios
+    # if platform.system() == "Darwin":
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-ios"] + version
+    #     runCmd(cmd)
 
-        cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
-        runCmd(cmd)
+    #     cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}", "-iossim"] + version
+    #     runCmd(cmd)
 
     os.chdir(cwd)
 
