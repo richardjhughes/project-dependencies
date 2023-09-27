@@ -49,7 +49,7 @@ def install(path, version):
     osName = platform.system()
 
     if version is None or len(version) <= 0:
-        version = "16.0.5"
+        version = "17.0.1"
 
     if osName == "Windows":
         installForWindows(installDir, version)

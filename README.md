@@ -37,9 +37,9 @@ python3 install_all.py -p /path/to/project/
 
 ## Clang
 
-##### Correct as of: 2023-09-24
+##### Correct as of: 2023-09-26
 
-By default, using version 16.0.5: https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.5
+By default, using version 17.0.1: https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.1
 
 To install, run `install.py`:
 
