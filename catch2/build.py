@@ -84,10 +84,10 @@ def build(tempDirPath):
     cmd = [cmakePath, f"-DCMAKE_INSTALL_PREFIX={installDir}", ".."]
     runCmd(cmd)
 
-    cmd = [cmakePath, "--build", ".", "--config", "Release"]
+    cmd = [cmakePath, "--build", "."]
     runCmd(cmd)
 
-    cmd = [cmakePath, "--install", ".", "--config", "Release"]
+    cmd = [cmakePath, "--install", "."]
     runCmd(cmd)
 
     os.chdir(cwd)
