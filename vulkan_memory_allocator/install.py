@@ -79,7 +79,7 @@ def install(path):
     createDirectories(installDir)
 
     # the src path is different to master
-    header_src_path = os.path.join(vmaPath, "src", "vk_mem_alloc.h")
+    header_src_path = os.path.join(vmaPath, "include", "vk_mem_alloc.h")
     header_dest_path = os.path.join(installDir, "vk_mem_alloc.h")
 
     shutil.copyfile(header_src_path, header_dest_path)
