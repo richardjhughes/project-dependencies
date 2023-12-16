@@ -134,10 +134,12 @@ To build, you need to install:
 To build, run `build.py`:
 
 ```shell
-python3 build.py -v version
+python3 build.py -v/--version version -fb/--force-build
 ```
 
 `-v` is optional.
+
+`-fb` is optional. This skips downloading the pre-built binary and builds anyway.
 
 This will build for the platform you are running this script on, be it Windows, Linux or Mac.
 

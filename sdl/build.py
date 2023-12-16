@@ -16,6 +16,7 @@ def configureArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--version", action="store", required=False, help="version to install")
     parser.add_argument("-ios", "--build-ios", action="store_true", required=False, help="build iOS binaries")
+    parser.add_argument("-fb", "--force-build", action="store_true", required=False, help="build even if a binary was released in the repo")
     args = parser.parse_args()
 
     return args
@@ -202,8 +203,10 @@ def doesNeedBuilding(buildiOS):
     return not isBuilt
 
 
-def tryAndDownloadBinaries(buildiOS):
-    
+def tryAndDownloadBinaries(forceBuild, buildiOS):
+    if forceBuild:
+        return False
+
     # as we build both ios and ios simulator together, try and
     # download them together
     if platform.system() == "Darwin" and buildiOS:
@@ -282,7 +285,7 @@ cwd = os.getcwd()
 tempDirPath = os.path.join(cwd, "__temp")
 
 if doesNeedBuilding(args.build_ios):
-    if tryAndDownloadBinaries(args.build_ios):
+    if tryAndDownloadBinaries(args.force_build, args.build_ios):
         print("Downloaded pre-built binaries.")
     else:
         build(args.build_ios, tempDirPath)
