@@ -368,6 +368,30 @@ def installNlohmannJson(path, deps):
     print("Installed nlohmann json.")
 
 
+def installRangesV3(path, deps):
+    if len(deps) > 0 and not "ranges-v3" in deps.keys():
+        return
+
+    print("Installing ranges-v3...")
+
+    version = []
+    if len(deps) > 0:
+        version = ["-v", f"{deps['ranges-v3']}"]
+
+    cwd = os.getcwd()
+    os.chdir("ranges-v3")
+
+    installPath = os.path.join(os.getcwd(), "install.py")
+
+    # install
+    cmd = [f"{pythonPath}", f"{installPath}", "-p", f"{path}"] + version
+    runCmd(cmd)
+
+    os.chdir(cwd)
+
+    print("Installed ranges-v3.")
+
+
 def installlibSodium(path, deps):
     if len(deps) > 0 and not "libsodium" in deps.keys():
         return
@@ -630,6 +654,8 @@ installSDLmixer(installPath, deps)
 installCatch2(installPath, deps)
 
 installNlohmannJson(installPath, deps)
+
+installRangesV3(installPath, deps)
 
 installlibSodium(installPath, deps)
 
